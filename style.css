@@ -429,6 +429,15 @@ h1, h2, h3, h4 {
   height: 30px;
   background: rgba(14,42,94,0.15);
 }
+.infobar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--white);
+  box-shadow: 0 2px 8px rgba(30,95,220,0.25);
+  flex-shrink: 0;
+}
 @media (max-width: 800px) {
   .infobar-inner { gap: 8px; padding: 10px 16px; }
   .infobar-item { padding: 4px 8px; }
