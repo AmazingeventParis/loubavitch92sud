@@ -990,6 +990,100 @@ h1, h2, h3, h4 {
   font-size: 13px;
 }
 
+/* === Quotidien (cercles photos) === */
+.quotidien-section {
+  padding: 60px 0;
+  background: linear-gradient(180deg, var(--white) 0%, #f0f9ff 100%);
+}
+.quotidien-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 22px;
+}
+.qcircle {
+  --qbg: var(--blue);
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  flex-shrink: 0;
+  box-shadow: 0 12px 28px rgba(14, 42, 94, 0.18);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+  background: var(--qbg);
+}
+.qcircle::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--qbg), color-mix(in srgb, var(--qbg) 60%, white));
+  z-index: -1;
+}
+.qcircle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.qcircle-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 22px 14px;
+  background: linear-gradient(0deg,
+    color-mix(in srgb, var(--qbg) 90%, black) 0%,
+    color-mix(in srgb, var(--qbg) 60%, transparent) 45%,
+    transparent 70%);
+  text-align: center;
+  transition: background 0.3s;
+}
+.qcircle-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+.qcircle-title small {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 3px;
+  opacity: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.qcircle:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 20px 40px rgba(14, 42, 94, 0.25);
+}
+.qcircle:hover img {
+  transform: scale(1.12);
+}
+.qcircle:hover .qcircle-overlay {
+  background: linear-gradient(0deg,
+    color-mix(in srgb, var(--qbg) 95%, black) 0%,
+    color-mix(in srgb, var(--qbg) 75%, transparent) 60%,
+    color-mix(in srgb, var(--qbg) 30%, transparent) 100%);
+}
+
+@media (max-width: 900px) {
+  .qcircle { width: 160px; height: 160px; }
+  .qcircle-title { font-size: 14px; }
+}
+@media (max-width: 500px) {
+  .qcircle { width: 140px; height: 140px; }
+  .qcircle-title { font-size: 13px; }
+  .quotidien-grid { gap: 18px 14px; }
+}
+
 /* === Paracha page === */
 .paracha-hero {
   margin-top: -30px;
