@@ -348,7 +348,7 @@ h1, h2, h3, h4 {
 
 /* === Quickbar === */
 .quickbar {
-  margin-top: -50px;
+  padding-bottom: 10px;
   position: relative;
   z-index: 5;
 }
@@ -992,8 +992,8 @@ h1, h2, h3, h4 {
 
 /* === Quotidien (cercles photos) === */
 .quotidien-section {
-  padding: 60px 0;
-  background: linear-gradient(180deg, var(--white) 0%, #f0f9ff 100%);
+  padding: 60px 0 50px;
+  background: var(--bg);
 }
 .quotidien-grid {
   display: flex;
