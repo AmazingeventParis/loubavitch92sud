@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propositions graphiques — section "Au quotidien"</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { background: #f4f6fa; }
+    .proposal {
+      background: var(--white);
+      margin: 30px auto;
+      max-width: 1240px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+    .proposal-head {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: var(--white);
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .proposal-head h2 {
+      color: var(--white);
+      font-size: 20px;
+      margin: 0;
+    }
+    .proposal-num {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    .proposal-head p { font-size: 13px; opacity: 0.9; margin: 4px 0 0; max-width: 60%; }
+    .proposal-body {
+      padding: 40px 30px 60px;
+      position: relative;
+    }
+    .nav-top {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 28px;
+      max-width: 1240px;
+      margin: 30px auto 0;
+      border-radius: var(--radius);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
+    .nav-top strong { font-size: 16px; margin-right: auto; }
+    .nav-top a {
+      color: var(--gold);
+      padding: 4px 10px;
+      border: 1px solid rgba(245,207,92,0.4);
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
+    .nav-top a:hover { background: var(--gold); color: var(--navy); }
+
+    /* === Variant 1: Constellation === */
+    .v1-wrapper {
+      position: relative;
+      padding: 30px 0;
+    }
+    .v1-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .v1-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* === Variant 2: Accent overlap === */
+    .v2-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px 36px;
+    }
+    .v2-circle {
+      position: relative;
+      width: 200px; height: 200px;
+    }
+    .v2-circle .qcircle {
+      width: 200px; height: 200px;
+    }
+    .v2-accent {
+      position: absolute;
+      bottom: -8px; right: -10px;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 5px solid var(--white);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--qbg, var(--blue));
+      z-index: 2;
+    }
+
+    /* === Variant 3: Organic asymmetric === */
+    .v3-wrapper {
+      position: relative;
+      min-height: 580px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .v3-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.35;
+      z-index: 0;
+    }
+    .v3-blob-1 { background: #1e5fdc; width: 380px; height: 380px; top: 20px; left: -40px; }
+    .v3-blob-2 { background: #f5cf5c; width: 280px; height: 280px; top: 280px; right: 60px; }
+    .v3-blob-3 { background: #00a7d5; width: 320px; height: 320px; bottom: -40px; left: 35%; }
+    .v3-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+    .v3-grid .qcircle { width: 100%; aspect-ratio: 1; height: auto; }
+    .v3-c1 { grid-column: 1 / 4; transform: translateY(20px); }
+    .v3-c2 { grid-column: 4 / 7; transform: translateY(-30px); }
+    .v3-c3 { grid-column: 7 / 10; transform: translateY(40px); }
+    .v3-c4 { grid-column: 10 / 13; transform: translateY(-10px); }
+    .v3-c5 { grid-column: 2 / 5; transform: translateY(0); }
+    .v3-c6 { grid-column: 5 / 9; transform: translateY(30px); }
+    .v3-c7 { grid-column: 9 / 12; transform: translateY(-20px); }
+
+    /* === Variant 4: Numbered editorial === */
+    .v4-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .v4-item {
+      position: relative;
+      text-align: center;
+    }
+    .v4-num {
+      position: absolute;
+      top: -10px; right: -8px;
+      background: var(--gold);
+      color: var(--navy);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 16px;
+      z-index: 3;
+      box-shadow: 0 4px 12px rgba(245,207,92,0.5);
+    }
+    .v4-item .qcircle { margin: 0 auto; width: 180px; height: 180px; }
+    .v4-label {
+      margin-top: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+    .v4-sub {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    /* === Variant 5: Stats + blobs === */
+    .v5-wrapper {
+      position: relative;
+    }
+    .v5-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: 0;
+    }
+    .v5-blob-1 { background: rgba(30,95,220,0.25); width: 350px; height: 350px; top: 0; left: 5%; }
+    .v5-blob-2 { background: rgba(245,207,92,0.3); width: 280px; height: 280px; top: 100px; right: 8%; }
+    .v5-grid {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px 22px;
+      margin-bottom: 50px;
+    }
+    .v5-stats {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .v5-stat {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--blue);
+    }
+    .v5-stat:nth-child(2) { border-top-color: var(--gold); }
+    .v5-stat:nth-child(3) { border-top-color: var(--cyan); }
+    .v5-stat:nth-child(4) { border-top-color: #be123c; }
+    .v5-stat strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .v5-stat span {
+      font-size: 12px;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    /* === Variant 6: Hexagonal honeycomb === */
+    .v6-wrapper {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 30px 0;
+    }
+    .v6-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .v6-row:nth-child(2) { transform: translateY(-30px); }
+    .v6-row:nth-child(3) { transform: translateY(-60px); }
+    .v6-hex {
+      width: 200px; height: 230px;
+      position: relative;
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      cursor: pointer;
+    }
+    .v6-hex:hover { transform: scale(1.06); }
+    .v6-hex img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .v6-hex-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 24px 18px;
+      background: linear-gradient(0deg,
+        rgba(14,42,94,0.92) 0%,
+        rgba(14,42,94,0.4) 35%,
+        transparent 65%);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.15;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+
+    /* Common qcircle */
+    .qcircle { width: 200px; height: 200px; }
+
+    @media (max-width: 800px) {
+      .v3-c1, .v3-c2, .v3-c3, .v3-c4 { grid-column: span 6; transform: none; }
+      .v3-c5, .v3-c6, .v3-c7 { grid-column: span 6; transform: none; }
+      .v4-grid { grid-template-columns: repeat(2, 1fr); }
+      .v5-stats { grid-template-columns: repeat(2, 1fr); }
+      .v6-row { flex-wrap: wrap; gap: 16px; }
+      .v6-row:nth-child(2), .v6-row:nth-child(3) { transform: none; }
+      .v6-hex { width: 160px; height: 184px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-top">
+    <strong>🎨 Propositions graphiques — section "Au quotidien"</strong>
+    <a href="#v1">1 Constellation</a>
+    <a href="#v2">2 Accent</a>
+    <a href="#v3">3 Organique</a>
+    <a href="#v4">4 Éditorial</a>
+    <a href="#v5">5 Blobs + Stats</a>
+    <a href="#v6">6 Hexagones</a>
+    <a href="/">← Retour site</a>
+  </div>
+
+  <!-- ===== VARIANT 1 : Constellation ===== -->
+  <div class="proposal" id="v1">
+    <div class="proposal-head">
+      <div>
+        <h2>Constellation — courbes pointillées entre les cercles</h2>
+        <p>Des lignes SVG ondulées relient les cercles, suggérant l'unité de la communauté.</p>
+      </div>
+      <span class="proposal-num">PROPOSITION 1</span>
+    </div>
+    <div class="proposal-body">
+      <div class="v1-wrapper">
+        <svg class="v1-svg" preserveAspectRatio="none" viewBox="0 0 1200 460">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1e5fdc" stop-opacity="0.5"/>
+              <stop offset="1" stop-color="#00a7d5" stop-opacity="0.4"/>
+            </linearGradient>
+          </defs>
+          <path d="M150,150 Q300,50 450,150 T750,150 T1050,150" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+          <path d="M250,360 Q450,260 650,360 T1000,360" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+          <path d="M150,150 Q200,300 250,360" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+          <circle cx="150" cy="150" r="4" fill="#f5cf5c"/>
+          <circle cx="450" cy="150" r="4" fill="#f5cf5c"/>
+          <circle cx="750" cy="150" r="4" fill="#f5cf5c"/>
+          <circle cx="1050" cy="150" r="4" fill="#f5cf5c"/>
+          <circle cx="250" cy="360" r="4" fill="#f5cf5c"/>
+          <circle cx="650" cy="360" r="4" fill="#f5cf5c"/>
+          <circle cx="1000" cy="360" r="4" fill="#f5cf5c"/>
+        </svg>
+        <div class="v1-grid">
+          <a href="#" class="qcircle" style="--qbg: #1e5fdc;"><img src="photos/synagogue.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Synagogue<br/>&amp; Offices</span></div></a>
+          <a href="#" class="qcircle" style="--qbg: #00a7d5;"><img src="photos/ecole.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">École<br/>Pardess 'Hannah</span></div></a>
+          <a href="#" class="qcircle" style="--qbg: #f5cf5c;"><img src="photos/maternelle.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Le Gan<br/>Pardess</span></div></a>
+          <a href="#" class="qcircle" style="--qbg: #d97706;"><img src="photos/creche.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Les<br/>Crèches</span></div></a>
+          <a href="#" class="qcircle" style="--qbg: #0e2a5e;"><img src="photos/cours-torah.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Cours<br/>&amp; Étude</span></div></a>
+          <a href="#" class="qcircle" style="--qbg: #be123c;"><img src="photos/lev-israel.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Lev Israël</span></div></a>
+          <a href="#" class="qcircle" style="--qbg: #0891b2;"><img src="photos/mikve.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Mikvé</span></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT 2 : Accent overlap (Kehila-style) ===== -->
+  <div class="proposal" id="v2">
+    <div class="proposal-head">
+      <div>
+        <h2>Accent overlap — petit cercle thématique en surimpression</h2>
+        <p>Comme le design Kehila d'origine : chaque grand cercle a un "badge" rond avec une icône thématique.</p>
+      </div>
+      <span class="proposal-num">PROPOSITION 2</span>
+    </div>
+    <div class="proposal-body">
+      <div class="v2-grid">
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #1e5fdc;"><img src="photos/synagogue.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Synagogue<br/>&amp; Offices</span></div></a><div class="v2-accent" style="--qbg: #1e5fdc;"><i class="fa-solid fa-star-of-david"></i></div></div>
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #00a7d5;"><img src="photos/ecole.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">École<br/>Pardess 'Hannah</span></div></a><div class="v2-accent" style="--qbg: #00a7d5;"><i class="fa-solid fa-graduation-cap"></i></div></div>
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #f5cf5c;"><img src="photos/maternelle.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Le Gan<br/>Pardess</span></div></a><div class="v2-accent" style="--qbg: #d97706;"><i class="fa-solid fa-puzzle-piece"></i></div></div>
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #d97706;"><img src="photos/creche.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Les<br/>Crèches</span></div></a><div class="v2-accent" style="--qbg: #d97706;"><i class="fa-solid fa-baby"></i></div></div>
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #0e2a5e;"><img src="photos/cours-torah.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Cours<br/>&amp; Étude</span></div></a><div class="v2-accent" style="--qbg: #0e2a5e;"><i class="fa-solid fa-book-open"></i></div></div>
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #be123c;"><img src="photos/lev-israel.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Lev Israël</span></div></a><div class="v2-accent" style="--qbg: #be123c;"><i class="fa-solid fa-heart"></i></div></div>
+        <div class="v2-circle"><a href="#" class="qcircle" style="--qbg: #0891b2;"><img src="photos/mikve.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Mikvé</span></div></a><div class="v2-accent" style="--qbg: #0891b2;"><i class="fa-solid fa-droplet"></i></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT 3 : Organic asymmetric ===== -->
+  <div class="proposal" id="v3">
+    <div class="proposal-head">
+      <div>
+        <h2>Organique — cercles décalés en hauteur + blobs colorés</h2>
+        <p>Layout asymétrique style "scrapbook" avec formes floues bleues et dorées en arrière-plan.</p>
+      </div>
+      <span class="proposal-num">PROPOSITION 3</span>
+    </div>
+    <div class="proposal-body">
+      <div class="v3-wrapper">
+        <div class="v3-blob v3-blob-1"></div>
+        <div class="v3-blob v3-blob-2"></div>
+        <div class="v3-blob v3-blob-3"></div>
+        <div class="v3-grid">
+          <a href="#" class="qcircle v3-c1" style="--qbg: #1e5fdc;"><img src="photos/synagogue.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Synagogue<br/>&amp; Offices</span></div></a>
+          <a href="#" class="qcircle v3-c2" style="--qbg: #00a7d5;"><img src="photos/ecole.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">École<br/>Pardess 'Hannah</span></div></a>
+          <a href="#" class="qcircle v3-c3" style="--qbg: #f5cf5c;"><img src="photos/maternelle.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Le Gan<br/>Pardess</span></div></a>
+          <a href="#" class="qcircle v3-c4" style="--qbg: #d97706;"><img src="photos/creche.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Les<br/>Crèches</span></div></a>
+          <a href="#" class="qcircle v3-c5" style="--qbg: #0e2a5e;"><img src="photos/cours-torah.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Cours<br/>&amp; Étude</span></div></a>
+          <a href="#" class="qcircle v3-c6" style="--qbg: #be123c;"><img src="photos/lev-israel.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Lev Israël</span></div></a>
+          <a href="#" class="qcircle v3-c7" style="--qbg: #0891b2;"><img src="photos/mikve.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Mikvé</span></div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT 4 : Numbered editorial ===== -->
+  <div class="proposal" id="v4">
+    <div class="proposal-head">
+      <div>
+        <h2>Éditorial — cercles numérotés avec titre dessous</h2>
+        <p>Style magazine : badges 01-07, titres séparés des cercles, image plus pure.</p>
+      </div>
+      <span class="proposal-num">PROPOSITION 4</span>
+    </div>
+    <div class="proposal-body">
+      <div class="v4-grid">
+        <div class="v4-item"><span class="v4-num">01</span><a href="#" class="qcircle" style="--qbg: #1e5fdc;"><img src="photos/synagogue.jpg"/></a><div class="v4-label">Synagogue & Offices<span class="v4-sub">Prières quotidiennes & Chabbat</span></div></div>
+        <div class="v4-item"><span class="v4-num">02</span><a href="#" class="qcircle" style="--qbg: #00a7d5;"><img src="photos/ecole.jpg"/></a><div class="v4-label">École Pardess 'Hannah<span class="v4-sub">Primaire & secondaire</span></div></div>
+        <div class="v4-item"><span class="v4-num">03</span><a href="#" class="qcircle" style="--qbg: #f5cf5c;"><img src="photos/maternelle.jpg"/></a><div class="v4-label">Le Gan Pardess<span class="v4-sub">Maternelle</span></div></div>
+        <div class="v4-item"><span class="v4-num">04</span><a href="#" class="qcircle" style="--qbg: #d97706;"><img src="photos/creche.jpg"/></a><div class="v4-label">Les Crèches<span class="v4-sub">Tout-petits</span></div></div>
+        <div class="v4-item"><span class="v4-num">05</span><a href="#" class="qcircle" style="--qbg: #0e2a5e;"><img src="photos/cours-torah.jpg"/></a><div class="v4-label">Cours & Étude<span class="v4-sub">Torah, Talmud, Hassidout</span></div></div>
+        <div class="v4-item"><span class="v4-num">06</span><a href="#" class="qcircle" style="--qbg: #be123c;"><img src="photos/lev-israel.jpg"/></a><div class="v4-label">Lev Israël<span class="v4-sub">Action sociale</span></div></div>
+        <div class="v4-item"><span class="v4-num">07</span><a href="#" class="qcircle" style="--qbg: #0891b2;"><img src="photos/mikve.jpg"/></a><div class="v4-label">Mikvé<span class="v4-sub">Bain rituel</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT 5 : Blobs + stats ===== -->
+  <div class="proposal" id="v5">
+    <div class="proposal-head">
+      <div>
+        <h2>Blobs + Stats — fond coloré + chiffres clés en bas</h2>
+        <p>Layout actuel enrichi de formes floutées colorées + bandeau de stats clés.</p>
+      </div>
+      <span class="proposal-num">PROPOSITION 5</span>
+    </div>
+    <div class="proposal-body v5-wrapper">
+      <div class="v5-blob v5-blob-1"></div>
+      <div class="v5-blob v5-blob-2"></div>
+      <div class="v5-grid">
+        <a href="#" class="qcircle" style="--qbg: #1e5fdc;"><img src="photos/synagogue.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Synagogue<br/>&amp; Offices</span></div></a>
+        <a href="#" class="qcircle" style="--qbg: #00a7d5;"><img src="photos/ecole.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">École<br/>Pardess 'Hannah</span></div></a>
+        <a href="#" class="qcircle" style="--qbg: #f5cf5c;"><img src="photos/maternelle.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Le Gan<br/>Pardess</span></div></a>
+        <a href="#" class="qcircle" style="--qbg: #d97706;"><img src="photos/creche.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Les<br/>Crèches</span></div></a>
+        <a href="#" class="qcircle" style="--qbg: #0e2a5e;"><img src="photos/cours-torah.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Cours<br/>&amp; Étude</span></div></a>
+        <a href="#" class="qcircle" style="--qbg: #be123c;"><img src="photos/lev-israel.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Lev Israël</span></div></a>
+        <a href="#" class="qcircle" style="--qbg: #0891b2;"><img src="photos/mikve.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Mikvé</span></div></a>
+      </div>
+      <div class="v5-stats">
+        <div class="v5-stat"><strong>+15</strong><span>Années au service</span></div>
+        <div class="v5-stat"><strong>300</strong><span>Familles</span></div>
+        <div class="v5-stat"><strong>50+</strong><span>Enfants à l'école</span></div>
+        <div class="v5-stat"><strong>7j/7</strong><span>À vos côtés</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT 6 : Hexagones honeycomb ===== -->
+  <div class="proposal" id="v6">
+    <div class="proposal-head">
+      <div>
+        <h2>Hexagones — disposition en nid d'abeille</h2>
+        <p>Formes hexagonales serrées, plus moderne et structuré que des cercles classiques.</p>
+      </div>
+      <span class="proposal-num">PROPOSITION 6</span>
+    </div>
+    <div class="proposal-body">
+      <div class="v6-wrapper">
+        <div class="v6-row">
+          <div class="v6-hex"><img src="photos/synagogue.jpg"/><div class="v6-hex-label">Synagogue<br/>&amp; Offices</div></div>
+          <div class="v6-hex"><img src="photos/ecole.jpg"/><div class="v6-hex-label">École<br/>Pardess 'Hannah</div></div>
+          <div class="v6-hex"><img src="photos/maternelle.jpg"/><div class="v6-hex-label">Le Gan<br/>Pardess</div></div>
+        </div>
+        <div class="v6-row">
+          <div class="v6-hex"><img src="photos/creche.jpg"/><div class="v6-hex-label">Les<br/>Crèches</div></div>
+          <div class="v6-hex"><img src="photos/cours-torah.jpg"/><div class="v6-hex-label">Cours<br/>&amp; Étude</div></div>
+        </div>
+        <div class="v6-row">
+          <div class="v6-hex"><img src="photos/lev-israel.jpg"/><div class="v6-hex-label">Lev Israël</div></div>
+          <div class="v6-hex"><img src="photos/mikve.jpg"/><div class="v6-hex-label">Mikvé</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding: 40px 20px 80px; color: var(--text-soft);">
+    <p>Une fois ta préférence choisie (ou un mix : "j'aime la 2 + les stats de la 5"), dis-le-moi et je l'intègre à la home.</p>
+  </div>
+
+</body>
+</html>
