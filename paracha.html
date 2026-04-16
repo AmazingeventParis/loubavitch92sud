@@ -221,6 +221,19 @@
     function frReason(reason) {
       return REASON_FR[reason] || reason;
     }
+    function frHolidayName(en) {
+      let s = en;
+      s = s.replace('Shavuot', 'Chavouot');
+      s = s.replace('Pesach', 'Pessa\'h');
+      s = s.replace('Sukkot', 'Souccot');
+      s = s.replace('Shmini Atzeret', 'Chemini Atseret');
+      s = s.replace('Simchat Torah', 'Sim\'hat Torah');
+      s = s.replace('Rosh Hashana', 'Roch Hachana');
+      s = s.replace('Yom Kippur', 'Yom Kipour');
+      s = s.replace('Chol ha-Moed', 'Hol HaMoëd');
+      s = s.replace('(on Shabbat)', '(tombant un Chabbat)');
+      return s;
+    }
 
     // === Find next Shabbat from today ===
     function nextShabbatISO() {
@@ -247,7 +260,9 @@
           target.innerHTML = '<p>Aucune paracha trouvée pour ce Chabbat.</p>';
           return;
         }
-        const nameFr = frParashaName(item.name.en);
+        const isHoliday = item.type === 'holiday';
+        const nameFr = isHoliday ? frHolidayName(item.name.en) : frParashaName(item.name.en);
+        const titlePrefix = isHoliday ? 'Chabbat de ' : 'Parachat ';
         const nameHe = item.name.he || '';
         const ref = frRef(item.summary || '');
         const haftara = item.haftara ? frRef(item.haftara) : '';
@@ -264,9 +279,9 @@
           <div class="paracha-hero-top">
             <div>
               <span class="paracha-eyebrow"><i class="fa-solid fa-book-open"></i> Cette semaine</span>
-              <h2>Parachat ${nameFr}</h2>
+              <h2>${titlePrefix}${nameFr}</h2>
               <p class="paracha-hebrew hebrew-text">${nameHe}</p>
-              ${reason ? `<span class="paracha-special"><i class="fa-solid fa-star"></i> ${reason}</span>` : ''}
+              ${isHoliday ? '<span class="paracha-special"><i class="fa-solid fa-star"></i> Yom Tov — lecture spéciale</span>' : (reason ? `<span class="paracha-special"><i class="fa-solid fa-star"></i> ${reason}</span>` : '')}
             </div>
             <div class="paracha-date-card">
               <span class="pdc-label">Lecture du Chabbat</span>
@@ -322,18 +337,28 @@
       try {
         const r = await fetch(url);
         const data = await r.json();
-        const items = (data.items || []).filter(it => it.type === 'shabbat');
+        // Include weekly parashiot AND holidays falling on Shabbat (Saturday)
+        const items = (data.items || []).filter(it => {
+          if (it.type === 'shabbat') return true;
+          if (it.type === 'holiday') {
+            const d = new Date(it.date + 'T12:00:00');
+            return d.getDay() === 6;
+          }
+          return false;
+        });
         const grid = document.getElementById('paracha-grid');
         if (items.length === 0) {
           grid.innerHTML = '<p style="text-align:center;color:var(--text-soft);">Aucune paracha à venir.</p>';
           return;
         }
-        grid.innerHTML = items.slice(0, 54).map((item, idx) => {
-          const nameFr = frParashaName(item.name.en);
+        grid.innerHTML = items.slice(0, 60).map((item, idx) => {
+          const isHoliday = item.type === 'holiday';
+          const nameFr = isHoliday ? frHolidayName(item.name.en) : frParashaName(item.name.en);
           const isThisWeek = idx === 0;
           return `
-            <div class="paracha-card ${isThisWeek ? 'paracha-card-active' : ''}">
+            <div class="paracha-card ${isThisWeek ? 'paracha-card-active' : ''} ${isHoliday ? 'paracha-card-holiday' : ''}">
               ${isThisWeek ? '<span class="paracha-badge">Cette semaine</span>' : ''}
+              ${isHoliday && !isThisWeek ? '<span class="paracha-badge paracha-badge-holiday">Yom Tov</span>' : ''}
               <div class="paracha-card-name">${nameFr}</div>
               <div class="paracha-card-he hebrew-text">${item.name.he || ''}</div>
               <div class="paracha-card-date">${fmtDateShort(item.date)}</div>

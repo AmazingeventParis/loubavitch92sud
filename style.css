@@ -1219,6 +1219,12 @@ h1, h2, h3, h4 {
   border-color: var(--gold);
   background: linear-gradient(135deg, var(--white) 0%, #fff8e7 100%);
 }
+.paracha-card-holiday {
+  border-color: #d97706;
+  background: linear-gradient(135deg, var(--white) 0%, #fef3c7 100%);
+}
+.paracha-card-holiday .paracha-card-name { color: #b45309; }
+.paracha-badge-holiday { background: #d97706; color: var(--white); }
 .paracha-badge {
   position: absolute;
   top: -7px;

@@ -390,6 +390,12 @@
         for (const [en, fr] of Object.entries(BOOK_FR)) if (p.startsWith(en + ' ')) return fr + ' ' + p.slice(en.length + 1);
         return p;
       }).join(' ; ');
+      const frHoliday = en => en
+        .replace('Shavuot', 'Chavouot').replace('Pesach', "Pessa'h")
+        .replace('Sukkot', 'Souccot').replace('Shmini Atzeret', 'Chemini Atseret')
+        .replace('Simchat Torah', "Sim'hat Torah").replace('Rosh Hashana', 'Roch Hachana')
+        .replace('Yom Kippur', 'Yom Kipour').replace('Chol ha-Moed', 'Hol HaMoëd')
+        .replace('(on Shabbat)', '(Chabbat)');
 
       const today = new Date();
       const day = today.getDay();
@@ -401,7 +407,9 @@
         const data = await r.json();
         const item = (data.items || [])[0];
         if (!item) return;
-        document.getElementById('pw-name').textContent = 'Parachat ' + frParasha(item.name.en);
+        const isHol = item.type === 'holiday';
+        const nameTxt = isHol ? frHoliday(item.name.en) : 'Parachat ' + frParasha(item.name.en);
+        document.getElementById('pw-name').textContent = isHol ? 'Chabbat de ' + nameTxt : nameTxt;
         document.getElementById('pw-he').textContent = item.name.he || '';
         document.getElementById('pw-torah').textContent = frRef((item.summary || '').split(';')[0].trim());
         document.getElementById('pw-haftara').textContent = item.haftara ? frRef(item.haftara) : '—';
