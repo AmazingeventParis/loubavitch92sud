@@ -211,6 +211,42 @@ h1, h2, h3, h4 {
   padding: 80px 0 100px;
   overflow: hidden;
 }
+.hero-photo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 100%;
+  background: url('photos/complex.jpg') center right / cover no-repeat;
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,0,0,0.15) 25%,
+    rgba(0,0,0,0.6) 60%,
+    rgba(0,0,0,0.85) 100%);
+  mask-image: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0,0,0,0.15) 25%,
+    rgba(0,0,0,0.6) 60%,
+    rgba(0,0,0,0.85) 100%);
+  mix-blend-mode: luminosity;
+  opacity: 0.55;
+  z-index: 0;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(14,42,94,0.92) 0%,
+    rgba(30,95,220,0.65) 35%,
+    rgba(30,95,220,0.25) 70%,
+    rgba(30,95,220,0.45) 100%);
+  z-index: 1;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
 .hero::before {
   content: "";
   position: absolute;
@@ -227,6 +263,7 @@ h1, h2, h3, h4 {
   height: 80px;
   background:
     radial-gradient(ellipse at 50% 100%, var(--bg) 50%, transparent 51%);
+  z-index: 3;
 }
 .hero-shape::after {
   content: "";
@@ -1898,6 +1935,7 @@ h1, h2, h3, h4 {
 }
 @media (max-width: 600px) {
   .hero { padding: 80px 0 100px; }
+  .hero-photo { width: 100%; opacity: 0.25; }
   .cards-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
   .topbar-left a:not(:first-child) { display: none; }
