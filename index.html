@@ -39,6 +39,7 @@
       </a>
       <nav class="nav">
         <ul>
+          <li><a href="horaires.html">Horaires Chabbat</a></li>
           <li><a href="#offices">Offices</a></li>
           <li><a href="#ecole">Complexe scolaire</a></li>
           <li><a href="convertisseur-de-dates.html">Convertisseur de dates</a></li>
@@ -99,6 +100,32 @@
         <div>
           <strong>06 14 25 67 81</strong>
           <span>Disponible 7j/7</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shabbat widget -->
+  <section class="shabbat-widget-section">
+    <div class="container">
+      <div class="shabbat-widget" id="shabbat-widget">
+        <div class="shabbat-widget-intro">
+          <span class="eyebrow"><i class="fa-solid fa-star-of-david"></i> Ce Chabbat</span>
+          <h3 id="sw-parasha">Chargement…</h3>
+          <p>Horaires calculés pour Montrouge.</p>
+          <a href="horaires.html" class="shabbat-widget-link">Voir tous les horaires <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="shabbat-widget-time">
+          <i class="fa-solid fa-fire"></i>
+          <span class="swt-label">Allumage des bougies</span>
+          <strong id="sw-candles">—</strong>
+          <span class="swt-date" id="sw-candles-date">—</span>
+        </div>
+        <div class="shabbat-widget-time">
+          <i class="fa-solid fa-wine-glass"></i>
+          <span class="swt-label">Fin du Chabbat</span>
+          <strong id="sw-havdalah">—</strong>
+          <span class="swt-date" id="sw-havdalah-date">—</span>
         </div>
       </div>
     </div>
@@ -263,6 +290,50 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (async function loadShabbatWidget() {
+      const WEEKDAYS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+      const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+      const fmtDate = iso => {
+        const d = new Date(iso);
+        return `${WEEKDAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+      };
+      const fmtTime = iso => {
+        const d = new Date(iso);
+        return `${d.getHours()}h${d.getMinutes().toString().padStart(2,'0')}`;
+      };
+      const today = new Date();
+      const end = new Date(today); end.setDate(today.getDate() + 14);
+      const url = `https://www.hebcal.com/hebcal?cfg=json&v=1&geo=pos&latitude=48.819&longitude=2.3178&tzid=Europe/Paris&b=18&M=on&c=on&s=on&lg=fr&i=off&start=${today.toISOString().slice(0,10)}&end=${end.toISOString().slice(0,10)}`;
+      try {
+        const r = await fetch(url);
+        const data = await r.json();
+        const items = data.items || [];
+        const candles = items.find(it => it.category === 'candles');
+        const havdalah = items.find(it => it.category === 'havdalah');
+        const parasha = items.find(it => it.category === 'parashat');
+        let parashaName = '';
+        if (parasha) parashaName = parasha.title.replace(/^Parachat /, '');
+        else if (candles && candles.memo) {
+          const m = candles.memo.match(/Parachah\s+(.+)/);
+          if (m) parashaName = m[1];
+        }
+        document.getElementById('sw-parasha').textContent = parashaName ? 'Parachat ' + parashaName : 'Chabbat';
+        if (candles) {
+          document.getElementById('sw-candles').textContent = fmtTime(candles.date);
+          document.getElementById('sw-candles-date').textContent = fmtDate(candles.date);
+        }
+        if (havdalah) {
+          document.getElementById('sw-havdalah').textContent = fmtTime(havdalah.date);
+          document.getElementById('sw-havdalah-date').textContent = fmtDate(havdalah.date);
+        }
+      } catch (e) {
+        document.getElementById('sw-parasha').textContent = 'Horaires indisponibles';
+        console.error(e);
+      }
+    })();
+  </script>
 
 </body>
 </html>

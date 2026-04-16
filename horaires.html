@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Horaires d'allumage des bougies, fin du Chabbat, paracha et fêtes juives à Montrouge. Beth Loubavitch 92 Sud." />
+  <title>Horaires Chabbat & Fêtes — Beth Loubavitch Montrouge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="lang"><i class="fa-solid fa-globe"></i> FR</span>
+        <a href="tel:0614256781"><i class="fa-solid fa-phone"></i> 06 14 25 67 81</a>
+        <a href="mailto:loubavitch92sud@gmail.com"><i class="fa-solid fa-envelope"></i> loubavitch92sud@gmail.com</a>
+      </div>
+      <div class="topbar-right">
+        <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="logo.png" alt="Beth Loubavitch Montrouge & Région" />
+      </a>
+      <nav class="nav">
+        <ul>
+          <li><a href="/#offices" class="active">Offices</a></li>
+          <li><a href="/#ecole">Complexe scolaire</a></li>
+          <li><a href="convertisseur-de-dates.html">Convertisseur de dates</a></li>
+          <li><a href="/#paracha">Étude | Paracha</a></li>
+          <li><a href="/#cgold">CGold</a></li>
+          <li><a href="/#cteen">CTeen</a></li>
+          <li><a href="/#caisse">Caisse alimentaire</a></li>
+          <li><a href="/#lunch">Lunch</a></li>
+          <li><a href="/#galeries">Galeries</a></li>
+        </ul>
+      </nav>
+      <a href="/#don" class="btn btn-primary btn-don">
+        <i class="fa-solid fa-heart"></i> Don Spontané
+      </a>
+      <button class="burger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/"><i class="fa-solid fa-house"></i> Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Horaires Chabbat &amp; Fêtes</span>
+      </div>
+      <h1>Horaires Chabbat &amp; Fêtes</h1>
+      <p>Allumage des bougies, fin du Chabbat, paracha et fêtes juives — pour Montrouge et le 92 Sud.</p>
+    </div>
+  </section>
+
+  <!-- This week (big) -->
+  <section class="shabbat-hero">
+    <div class="container">
+      <div class="shabbat-hero-card" id="shabbat-hero-card">
+        <div class="shabbat-hero-loading">
+          <i class="fa-solid fa-spinner fa-spin"></i> Chargement…
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 weeks ahead -->
+  <section class="weeks-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Prochaines semaines</span>
+        <h2>Les 4 prochains Chabbatot</h2>
+        <p>Anticipez vos préparatifs : horaires d'allumage et de Havdalah pour le mois à venir.</p>
+      </div>
+      <div class="weeks-grid" id="weeks-grid">
+        <div class="weeks-loading"><i class="fa-solid fa-spinner fa-spin"></i> Chargement…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Holidays -->
+  <section class="holidays-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Calendrier juif</span>
+        <h2>Fêtes &amp; jours marquants à venir</h2>
+        <p>Roch Hodech, fêtes majeures et jeûnes sur les 60 prochains jours.</p>
+      </div>
+      <div class="holidays-list" id="holidays-list">
+        <div class="weeks-loading"><i class="fa-solid fa-spinner fa-spin"></i> Chargement…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info -->
+  <section class="converter-section">
+    <div class="container">
+      <div class="info-box">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+          <h3>Comment lire ces horaires ?</h3>
+          <p><strong>Allumage des bougies</strong> : 18 minutes avant le coucher du soleil (minhag Loubavitch). <strong>Fin du Chabbat (Havdalah)</strong> : 50 minutes après le coucher du soleil. Calculs basés sur la position géographique de Montrouge (48,82°N – 2,32°E). Données fournies par <a href="https://www.hebcal.com" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;">Hebcal</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <img src="logo.png" alt="Beth Loubavitch" class="footer-logo" />
+        <p>Beth Loubavitch Montrouge &amp; Région — au service de la communauté juive du 92 Sud.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><i class="fa-solid fa-user"></i> Rav David Mimoun</li>
+          <li><i class="fa-solid fa-location-dot"></i> 4 rue René Barthélémy<br />92120 Montrouge</li>
+          <li><i class="fa-solid fa-phone"></i> <a href="tel:0614256781">06 14 25 67 81</a></li>
+          <li><i class="fa-solid fa-envelope"></i> <a href="mailto:loubavitch92sud@gmail.com">loubavitch92sud@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="horaires.html">Horaires Chabbat</a></li>
+          <li><a href="convertisseur-de-dates.html">Convertisseur de dates</a></li>
+          <li><a href="/#galeries">Galeries</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mentions légales</h4>
+        <ul>
+          <li><a href="#">Conditions générales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 Beth Loubavitch Montrouge &amp; Région. Tous droits réservés.</p>
+        <p class="footer-credit">Site créé par <a href="https://swipego.app" target="_blank" rel="noopener">Swipego</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const HEBCAL_BASE = 'https://www.hebcal.com/hebcal?cfg=json&v=1&maj=on&min=on&mod=on&nx=on&geo=pos&latitude=48.819&longitude=2.3178&tzid=Europe/Paris&b=18&M=on&c=on&s=on&lg=fr&i=off';
+
+    const WEEKDAYS_FR = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+    function fmtDate(dateStr) {
+      const d = new Date(dateStr);
+      return `${WEEKDAYS_FR[d.getDay()]} ${d.getDate()} ${MONTHS_FR[d.getMonth()]} ${d.getFullYear()}`;
+    }
+    function fmtDateShort(dateStr) {
+      const d = new Date(dateStr);
+      return `${d.getDate()} ${MONTHS_FR[d.getMonth()]}`;
+    }
+    function fmtTime(isoStr) {
+      const d = new Date(isoStr);
+      const h = d.getHours();
+      const m = d.getMinutes().toString().padStart(2, '0');
+      return `${h}h${m}`;
+    }
+    function isoDay(date) {
+      return date.toISOString().slice(0, 10);
+    }
+
+    async function fetchRange(start, end) {
+      const url = `${HEBCAL_BASE}&start=${start}&end=${end}`;
+      const r = await fetch(url);
+      return r.json();
+    }
+
+    // Group items by week (Friday → Saturday)
+    function groupByShabbat(items) {
+      const weeks = {};
+      items.forEach(it => {
+        if (it.category !== 'candles' && it.category !== 'havdalah' && it.category !== 'parashat') return;
+        const d = new Date(it.date);
+        // Find Friday of this week
+        let day = d.getDay();
+        let friday = new Date(d);
+        if (day === 6) friday.setDate(d.getDate() - 1); // Saturday → previous Friday
+        else if (day === 5) friday = d;
+        else friday.setDate(d.getDate() + (5 - day) - (day > 5 ? 7 : 0));
+        const key = isoDay(friday);
+        if (!weeks[key]) weeks[key] = { friday: key };
+        if (it.category === 'candles') weeks[key].candles = it;
+        if (it.category === 'havdalah') weeks[key].havdalah = it;
+        if (it.category === 'parashat') weeks[key].parasha = it;
+      });
+      return Object.values(weeks).sort((a, b) => a.friday.localeCompare(b.friday));
+    }
+
+    function getParashaName(week) {
+      if (week.parasha) return week.parasha.hebrew ? week.parasha.title.replace(/^Parachat /, '') : week.parasha.title;
+      if (week.candles && week.candles.memo) {
+        const m = week.candles.memo.match(/Parachah\s+(.+)/);
+        if (m) return m[1];
+      }
+      return '';
+    }
+
+    async function load() {
+      const today = new Date();
+      const startStr = isoDay(today);
+      const end = new Date(today);
+      end.setDate(today.getDate() + 70);
+      const data = await fetchRange(startStr, isoDay(end));
+      const items = data.items || [];
+
+      // ===== Hero card (next Shabbat) =====
+      const weeks = groupByShabbat(items);
+      const upcoming = weeks.filter(w => new Date(w.friday) >= new Date(startStr.slice(0, 10) + 'T00:00:00'));
+      const next = upcoming[0];
+      const heroCard = document.getElementById('shabbat-hero-card');
+      if (next) {
+        const parasha = getParashaName(next);
+        heroCard.innerHTML = `
+          <div class="shabbat-eyebrow"><i class="fa-solid fa-star-of-david"></i> Ce Chabbat</div>
+          <h2 class="shabbat-parasha">${parasha ? 'Parachat ' + parasha : 'Chabbat'}</h2>
+          <div class="shabbat-times">
+            <div class="shabbat-time">
+              <div class="shabbat-time-icon"><i class="fa-solid fa-fire"></i></div>
+              <span class="shabbat-time-label">Allumage des bougies</span>
+              <strong>${next.candles ? fmtTime(next.candles.date) : '—'}</strong>
+              <span class="shabbat-time-date">${next.candles ? fmtDate(next.candles.date) : ''}</span>
+            </div>
+            <div class="shabbat-time">
+              <div class="shabbat-time-icon"><i class="fa-solid fa-wine-glass"></i></div>
+              <span class="shabbat-time-label">Fin du Chabbat (Havdalah)</span>
+              <strong>${next.havdalah ? fmtTime(next.havdalah.date) : '—'}</strong>
+              <span class="shabbat-time-date">${next.havdalah ? fmtDate(next.havdalah.date) : ''}</span>
+            </div>
+          </div>
+        `;
+      } else {
+        heroCard.innerHTML = '<p>Aucune donnée disponible.</p>';
+      }
+
+      // ===== 4 weeks =====
+      const weeksGrid = document.getElementById('weeks-grid');
+      const fourWeeks = upcoming.slice(0, 4);
+      weeksGrid.innerHTML = fourWeeks.map((w, i) => {
+        const parasha = getParashaName(w);
+        const isFirst = i === 0;
+        return `
+          <div class="week-card ${isFirst ? 'week-card-active' : ''}">
+            ${isFirst ? '<span class="week-badge">Cette semaine</span>' : ''}
+            <div class="week-parasha">${parasha ? 'Parachat ' + parasha : 'Chabbat'}</div>
+            <div class="week-date">${w.candles ? fmtDateShort(w.candles.date) : ''}</div>
+            <div class="week-times">
+              <div class="week-time">
+                <i class="fa-solid fa-fire"></i>
+                <div>
+                  <span>Allumage</span>
+                  <strong>${w.candles ? fmtTime(w.candles.date) : '—'}</strong>
+                </div>
+              </div>
+              <div class="week-time">
+                <i class="fa-solid fa-wine-glass"></i>
+                <div>
+                  <span>Havdalah</span>
+                  <strong>${w.havdalah ? fmtTime(w.havdalah.date) : '—'}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // ===== Holidays =====
+      const holidaysList = document.getElementById('holidays-list');
+      const holidays = items.filter(it =>
+        ['holiday', 'roshchodesh'].includes(it.category) ||
+        (it.category === undefined && it.subcat) ||
+        ['major', 'minor', 'modern', 'fast'].includes(it.subcat)
+      ).slice(0, 12);
+
+      if (holidays.length === 0) {
+        holidaysList.innerHTML = '<p style="text-align:center;color:var(--text-soft);">Aucune fête dans les 60 prochains jours.</p>';
+      } else {
+        holidaysList.innerHTML = holidays.map(h => {
+          const d = new Date(h.date);
+          const day = d.getDate();
+          const month = MONTHS_FR[d.getMonth()].slice(0, 3);
+          const wd = WEEKDAYS_FR[d.getDay()].slice(0, 3);
+          const subcatLabel = {
+            major: 'Fête majeure',
+            minor: 'Fête mineure',
+            modern: 'Fête moderne',
+            fast: 'Jeûne',
+            roshchodesh: 'Roch Hodech'
+          };
+          const tag = h.category === 'roshchodesh' ? 'Roch Hodech' : (subcatLabel[h.subcat] || 'Fête');
+          return `
+            <div class="holiday-item">
+              <div class="holiday-date">
+                <span class="holiday-day">${day}</span>
+                <span class="holiday-month">${month}</span>
+                <span class="holiday-weekday">${wd}.</span>
+              </div>
+              <div class="holiday-info">
+                <h3>${h.title}</h3>
+                <div class="holiday-meta">
+                  <span class="holiday-tag">${tag}</span>
+                  ${h.hdate ? `<span class="holiday-hdate">${h.hdate}</span>` : ''}
+                  ${h.hebrew ? `<span class="holiday-heb hebrew-text">${h.hebrew}</span>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    load().catch(err => {
+      document.getElementById('shabbat-hero-card').innerHTML =
+        '<p style="color:#dc2626"><i class="fa-solid fa-triangle-exclamation"></i> Impossible de charger les horaires. Vérifiez votre connexion.</p>';
+      console.error(err);
+    });
+  </script>
+
+</body>
+</html>
