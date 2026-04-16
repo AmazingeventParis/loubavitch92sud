@@ -43,7 +43,7 @@
           <li><a href="#offices">Offices</a></li>
           <li><a href="#ecole">Complexe scolaire</a></li>
           <li><a href="convertisseur-de-dates.html">Convertisseur de dates</a></li>
-          <li><a href="#paracha">Étude | Paracha</a></li>
+          <li><a href="paracha.html">Étude | Paracha</a></li>
           <li><a href="#cgold">CGold</a></li>
           <li><a href="#cteen">CTeen</a></li>
           <li><a href="#caisse">Caisse alimentaire</a></li>
@@ -131,6 +131,31 @@
     </div>
   </section>
 
+  <!-- Paracha widget -->
+  <section class="paracha-widget-section">
+    <div class="container">
+      <div class="paracha-widget" id="paracha-widget">
+        <div class="paracha-widget-intro">
+          <span class="eyebrow"><i class="fa-solid fa-book-open"></i> Paracha de la semaine</span>
+          <h3 id="pw-name">Chargement…</h3>
+          <span class="hebrew-text" id="pw-he"></span>
+          <p>Étudiez la section hebdomadaire de la Torah.</p>
+          <a href="paracha.html">Voir la paracha complète <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="paracha-widget-ref">
+          <i class="fa-solid fa-scroll"></i>
+          <span class="pwr-label">Lecture Torah</span>
+          <strong id="pw-torah">—</strong>
+        </div>
+        <div class="paracha-widget-ref">
+          <i class="fa-solid fa-feather"></i>
+          <span class="pwr-label">Haftara</span>
+          <strong id="pw-haftara">—</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Sections cards -->
   <section class="sections" id="offices">
     <div class="container">
@@ -155,7 +180,7 @@
           <span class="card-link">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
         </a>
 
-        <a href="#paracha" class="card">
+        <a href="paracha.html" class="card">
           <div class="card-icon"><i class="fa-solid fa-book"></i></div>
           <h3>Étude | Paracha</h3>
           <p>Cours de Torah et étude hebdomadaire de la Paracha.</p>
@@ -330,6 +355,58 @@
         }
       } catch (e) {
         document.getElementById('sw-parasha').textContent = 'Horaires indisponibles';
+        console.error(e);
+      }
+    })();
+
+    (async function loadParashaWidget() {
+      const PARASHA_FR = {
+        "Bereshit":"Béréchit","Noach":"Noah","Lech-Lecha":"Lekh Lekha","Vayera":"Vayéra",
+        "Chayei Sara":"Hayé Sarah","Toldot":"Toldot","Vayetzei":"Vayétsé","Vayishlach":"Vayichla'h",
+        "Vayeshev":"Vayéchev","Miketz":"Mikets","Vayigash":"Vayigach","Vayechi":"Vayehi",
+        "Shemot":"Chemot","Vaera":"Vaéra","Bo":"Bo","Beshalach":"Béchala'h","Yitro":"Yitro",
+        "Mishpatim":"Michpatim","Terumah":"Térouma","Tetzaveh":"Tetsavé","Ki Tisa":"Ki Tissa",
+        "Vayakhel":"Vayakhel","Pekudei":"Pékoudé","Vayikra":"Vayikra","Tzav":"Tsav",
+        "Shmini":"Chemini","Tazria":"Tazria","Metzora":"Metsora","Achrei Mot":"Aharé Mot",
+        "Kedoshim":"Kedochim","Emor":"Emor","Behar":"Béhar","Bechukotai":"Bechoukotaï",
+        "Bamidbar":"Bamidbar","Nasso":"Nasso","Beha'alotcha":"Béha'alotekha",
+        "Sh'lach":"Chela'h Lekha","Korach":"Korah","Chukat":"Houkat","Balak":"Balak",
+        "Pinchas":"Pinhas","Matot":"Matot","Masei":"Massé","Devarim":"Dévarim",
+        "Vaetchanan":"Vaét'hanan","Eikev":"Ekev","Re'eh":"Réé","Shoftim":"Choftim",
+        "Ki Teitzei":"Ki Tétsé","Ki Tavo":"Ki Tavo","Nitzavim":"Nitsavim",
+        "Vayeilech":"Vayélekh","Ha'Azinu":"Haazinou","Vezot Haberachah":"Vézot HaBerakha"
+      };
+      const BOOK_FR = {
+        "Genesis":"Béréchit","Exodus":"Chemot","Leviticus":"Vayikra","Numbers":"Bamidbar","Deuteronomy":"Dévarim",
+        "Isaiah":"Isaïe","Jeremiah":"Jérémie","Ezekiel":"Ézéchiel","Hosea":"Osée","Joel":"Yoël","Amos":"Amos",
+        "Obadiah":"Abdias","Jonah":"Jonas","Micah":"Michée","Nahum":"Nahoum","Habakkuk":"'Habakouk",
+        "Zephaniah":"Sophonie","Haggai":"Aggée","Zechariah":"Zacharie","Malachi":"Malachie",
+        "Joshua":"Josué","Judges":"Juges","I Samuel":"Chmouel I","II Samuel":"Chmouel II",
+        "I Kings":"Melakhim I","II Kings":"Melakhim II"
+      };
+      const frParasha = n => PARASHA_FR[n] || (n.includes('-') ? n.split('-').map(p => PARASHA_FR[p.trim()] || p).join('-') : n);
+      const frRef = ref => ref.split(';').map(p => {
+        p = p.trim();
+        for (const [en, fr] of Object.entries(BOOK_FR)) if (p.startsWith(en + ' ')) return fr + ' ' + p.slice(en.length + 1);
+        return p;
+      }).join(' ; ');
+
+      const today = new Date();
+      const day = today.getDay();
+      const sat = new Date(today);
+      sat.setDate(today.getDate() + (day === 6 ? 0 : 6 - day));
+      const iso = sat.toISOString().slice(0, 10);
+      try {
+        const r = await fetch(`https://www.hebcal.com/leyning?cfg=json&start=${iso}&end=${iso}&i=off`);
+        const data = await r.json();
+        const item = (data.items || [])[0];
+        if (!item) return;
+        document.getElementById('pw-name').textContent = 'Parachat ' + frParasha(item.name.en);
+        document.getElementById('pw-he').textContent = item.name.he || '';
+        document.getElementById('pw-torah').textContent = frRef((item.summary || '').split(';')[0].trim());
+        document.getElementById('pw-haftara').textContent = item.haftara ? frRef(item.haftara) : '—';
+      } catch (e) {
+        document.getElementById('pw-name').textContent = 'Paracha indisponible';
         console.error(e);
       }
     })();

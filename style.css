@@ -990,6 +990,339 @@ h1, h2, h3, h4 {
   font-size: 13px;
 }
 
+/* === Paracha page === */
+.paracha-hero {
+  margin-top: -30px;
+  position: relative;
+  z-index: 5;
+}
+.paracha-hero-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 28px 32px;
+  border-top: 4px solid var(--blue);
+  position: relative;
+  overflow: hidden;
+}
+.paracha-hero-card::before {
+  content: "";
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(30, 95, 220, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.paracha-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 22px;
+  position: relative;
+  flex-wrap: wrap;
+}
+.paracha-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cyan-light);
+  color: var(--blue);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.paracha-hero-card h2 {
+  font-size: clamp(22px, 3vw, 32px);
+  margin-bottom: 4px;
+}
+.paracha-hebrew {
+  font-size: 22px !important;
+  margin-bottom: 8px !important;
+  display: block;
+}
+.paracha-special {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 12px;
+  margin-top: 6px;
+}
+.paracha-date-card {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  color: var(--white);
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  min-width: 200px;
+}
+.pdc-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+.paracha-date-card strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  line-height: 1.3;
+}
+.pdc-hdate {
+  display: block;
+  font-size: 11px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+.paracha-refs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+  position: relative;
+}
+.paracha-ref {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--cyan-light);
+  border-radius: var(--radius-sm);
+}
+.paracha-ref:nth-child(2) { background: #fff8e7; }
+.paracha-ref i {
+  width: 36px; height: 36px;
+  background: var(--blue);
+  color: var(--white);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.paracha-ref:nth-child(2) i { background: var(--gold); color: var(--navy); }
+.paracha-ref span {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+.paracha-ref strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+}
+.paracha-aliyot {
+  margin-bottom: 22px;
+  position: relative;
+}
+.paracha-aliyot h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: var(--navy);
+}
+.paracha-aliyot h3 i { color: var(--gold); font-size: 13px; }
+.paracha-aliyot ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 18px;
+  list-style: none;
+  padding: 0;
+}
+.paracha-aliyot li {
+  font-size: 12px;
+  color: var(--text);
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.paracha-aliyot li em {
+  color: var(--text-soft);
+  font-style: normal;
+  font-size: 11px;
+}
+.aliya-num {
+  width: 22px; height: 22px;
+  background: var(--cyan-light);
+  color: var(--blue);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.paracha-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.btn-outline-blue {
+  background: transparent;
+  color: var(--blue);
+  border-color: var(--blue);
+}
+.btn-outline-blue:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.paracha-calendar-section {
+  padding: 60px 0 80px;
+}
+.paracha-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.paracha-card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+  transition: all 0.25s;
+  position: relative;
+}
+.paracha-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--blue);
+}
+.paracha-card-active {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, var(--white) 0%, #fff8e7 100%);
+}
+.paracha-badge {
+  position: absolute;
+  top: -7px;
+  left: 14px;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 2px 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 50px;
+}
+.paracha-card-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: var(--navy);
+  font-size: 14px;
+  margin-bottom: 1px;
+}
+.paracha-card-he {
+  font-size: 13px !important;
+  margin-bottom: 6px !important;
+  color: var(--text-soft) !important;
+  display: block;
+}
+.paracha-card-date {
+  font-size: 11px;
+  color: var(--blue);
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+.paracha-card-ref {
+  font-size: 11px;
+  color: var(--text-soft);
+}
+
+/* === Homepage Paracha widget === */
+.paracha-widget-section {
+  padding: 30px 0 0;
+  background: linear-gradient(135deg, #f0f9ff 0%, var(--white) 100%);
+}
+.paracha-widget {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 18px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 22px 26px;
+  border-top: 4px solid var(--blue);
+  align-items: center;
+}
+.paracha-widget-intro h3 {
+  font-size: 17px;
+  margin-bottom: 2px;
+}
+.paracha-widget-intro .hebrew-text { font-size: 16px !important; margin-bottom: 8px; display: block; }
+.paracha-widget-intro p {
+  color: var(--text-soft);
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.paracha-widget-intro .eyebrow { margin-bottom: 6px; }
+.paracha-widget-intro a {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.paracha-widget-intro a:hover { gap: 10px; }
+.paracha-widget-ref {
+  padding: 14px 12px;
+  background: var(--cyan-light);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.paracha-widget-ref:nth-child(3) { background: #fff8e7; }
+.paracha-widget-ref i {
+  font-size: 17px;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.paracha-widget-ref:nth-child(3) i { color: var(--gold); }
+.paracha-widget-ref .pwr-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+.paracha-widget-ref strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+}
+
 /* Active nav */
 .nav ul a.active {
   background: var(--blue);
@@ -1394,9 +1727,14 @@ h1, h2, h3, h4 {
   .weeks-grid { grid-template-columns: repeat(2, 1fr); }
   .holidays-list { grid-template-columns: 1fr; }
   .shabbat-widget { grid-template-columns: 1fr; text-align: center; }
+  .paracha-widget { grid-template-columns: 1fr; text-align: center; }
+  .paracha-refs { grid-template-columns: 1fr; }
+  .paracha-aliyot ul { grid-template-columns: 1fr; }
+  .paracha-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
   .weeks-grid { grid-template-columns: 1fr; }
+  .paracha-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .hero { padding: 80px 0 100px; }
