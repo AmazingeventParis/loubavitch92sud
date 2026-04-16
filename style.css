@@ -1034,7 +1034,7 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 22px 14px;
+  padding: 30px 30px 24px;
   background: linear-gradient(0deg,
     color-mix(in srgb, var(--qbg) 90%, black) 0%,
     color-mix(in srgb, var(--qbg) 60%, transparent) 45%,
@@ -1046,14 +1046,16 @@ h1, h2, h3, h4 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   color: var(--white);
-  font-size: 16px;
-  line-height: 1.2;
-  letter-spacing: 0.3px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+  max-width: 100%;
+  word-break: break-word;
 }
 .qcircle-title small {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   margin-top: 3px;
   opacity: 0.95;
@@ -1076,11 +1078,13 @@ h1, h2, h3, h4 {
 
 @media (max-width: 900px) {
   .qcircle { width: 160px; height: 160px; }
-  .qcircle-title { font-size: 14px; }
+  .qcircle-title { font-size: 12px; }
+  .qcircle-overlay { padding: 24px 22px 18px; }
 }
 @media (max-width: 500px) {
   .qcircle { width: 140px; height: 140px; }
-  .qcircle-title { font-size: 13px; }
+  .qcircle-title { font-size: 11px; }
+  .qcircle-overlay { padding: 20px 18px 14px; }
   .quotidien-grid { gap: 18px 14px; }
 }
 
