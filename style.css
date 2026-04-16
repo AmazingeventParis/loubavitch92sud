@@ -260,12 +260,78 @@ h1, h2, h3, h4 {
   margin-bottom: 18px;
   letter-spacing: -1px;
 }
-.hero h1 span {
-  color: var(--gold);
+.hero h1 .line {
   display: block;
+  overflow: hidden;
+  line-height: 1.05;
+  padding-bottom: 6px;
+}
+.hero h1 .line-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  animation: lineRise 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero h1 .line-1 .line-inner { animation-delay: 0.25s; }
+.hero h1 .line-2 .line-inner {
+  animation-delay: 0.55s;
   font-size: 0.7em;
   font-weight: 700;
   margin-top: 4px;
+  background: linear-gradient(90deg,
+    var(--gold) 0%,
+    #fff3b8 30%,
+    var(--gold) 60%,
+    #f0b73a 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.hero h1 .line-2 .line-inner.shimmer {
+  animation: lineRise 1s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards,
+             shimmer 4s linear 1.6s infinite;
+}
+
+@keyframes lineRise {
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Hero secondary entrance */
+.anim-fade-down {
+  opacity: 0;
+  transform: translateY(-12px);
+  animation: fadeDown 0.7s ease-out 0.05s forwards;
+}
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease-out 0.95s forwards;
+}
+.anim-fade-up-late {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease-out 1.15s forwards;
+}
+@keyframes fadeDown {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .line-inner,
+  .anim-fade-down, .anim-fade-up, .anim-fade-up-late {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 .hero p {
   font-size: 19px;
