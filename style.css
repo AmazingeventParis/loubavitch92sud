@@ -376,11 +376,68 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-/* === Quickbar === */
+/* === Infobar (slim, sous le header) === */
+.infobar {
+  background: linear-gradient(90deg, #e6f6fb 0%, #fff8e7 50%, #e6f6fb 100%);
+  border-bottom: 1px solid var(--border);
+}
+.infobar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 10px 24px;
+  flex-wrap: wrap;
+}
+.infobar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 24px;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.infobar-item:hover { color: var(--blue); }
+.infobar-item i {
+  width: 30px; height: 30px;
+  background: var(--white);
+  color: var(--blue);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(30,95,220,0.18);
+}
+.infobar-item strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--navy);
+  line-height: 1.15;
+}
+.infobar-item span {
+  display: block;
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 1px;
+}
+.infobar-sep {
+  width: 1px;
+  height: 30px;
+  background: rgba(14,42,94,0.15);
+}
+@media (max-width: 800px) {
+  .infobar-inner { gap: 8px; padding: 10px 16px; }
+  .infobar-item { padding: 4px 8px; }
+  .infobar-item span { display: none; }
+  .infobar-sep { display: none; }
+}
+/* === Quickbar (legacy, no longer used) === */
 .quickbar {
-  padding-bottom: 10px;
-  position: relative;
-  z-index: 5;
+  display: none;
 }
 .quickbar-inner {
   background: var(--white);
