@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Convertisseur de dates entre calendrier grégorien et calendrier hébraïque. Beth Loubavitch Montrouge & Région." />
+  <title>Convertisseur de dates — Beth Loubavitch Montrouge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <script src="https://cdn.jsdelivr.net/npm/@hebcal/core@5.10.1/dist/bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="lang"><i class="fa-solid fa-globe"></i> FR</span>
+        <a href="tel:0614256781"><i class="fa-solid fa-phone"></i> 06 14 25 67 81</a>
+        <a href="mailto:loubavitch92sud@gmail.com"><i class="fa-solid fa-envelope"></i> loubavitch92sud@gmail.com</a>
+      </div>
+      <div class="topbar-right">
+        <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="logo.png" alt="Beth Loubavitch Montrouge & Région" />
+      </a>
+      <nav class="nav">
+        <ul>
+          <li><a href="/#pourim" class="nav-highlight">Pourim 5786</a></li>
+          <li><a href="/#offices">Offices</a></li>
+          <li><a href="/#ecole">Complexe scolaire</a></li>
+          <li><a href="convertisseur-de-dates.html" class="active">Convertisseur de dates</a></li>
+          <li><a href="/#paracha">Étude | Paracha</a></li>
+          <li><a href="/#cgold">CGold</a></li>
+          <li><a href="/#cteen">CTeen</a></li>
+          <li><a href="/#caisse">Caisse alimentaire</a></li>
+          <li><a href="/#lunch">Lunch</a></li>
+          <li><a href="/#galeries">Galeries</a></li>
+        </ul>
+      </nav>
+      <a href="/#don" class="btn btn-primary btn-don">
+        <i class="fa-solid fa-heart"></i> Don Spontané
+      </a>
+      <button class="burger" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- Page header -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/"><i class="fa-solid fa-house"></i> Accueil</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Convertisseur de dates</span>
+      </div>
+      <h1>Convertisseur de dates</h1>
+      <p>Convertissez instantanément entre le calendrier grégorien et le calendrier hébraïque.</p>
+    </div>
+  </section>
+
+  <!-- Today widget -->
+  <section class="today-widget">
+    <div class="container">
+      <div class="today-card">
+        <div class="today-icon"><i class="fa-solid fa-star-of-david"></i></div>
+        <div class="today-content">
+          <span class="today-label">Aujourd'hui</span>
+          <div class="today-dates">
+            <div class="today-date today-greg">
+              <strong id="today-greg">—</strong>
+              <span>Calendrier grégorien</span>
+            </div>
+            <div class="today-sep"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+            <div class="today-date today-heb">
+              <strong id="today-heb">—</strong>
+              <span id="today-heb-hebrew" class="hebrew-text">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Converter -->
+  <section class="converter-section">
+    <div class="container">
+      <div class="converter-grid">
+
+        <!-- Greg → Heb -->
+        <div class="converter-card">
+          <div class="converter-head">
+            <span class="converter-num">1</span>
+            <h2>Date civile → Date hébraïque</h2>
+          </div>
+          <div class="converter-body">
+            <label class="field">
+              <span>Date grégorienne</span>
+              <input type="date" id="greg-input" />
+            </label>
+            <label class="field">
+              <span>Coucher du soleil ?</span>
+              <select id="greg-after-sunset">
+                <option value="false">Avant le coucher du soleil</option>
+                <option value="true">Après le coucher du soleil</option>
+              </select>
+              <small>Le jour hébraïque commence à la tombée de la nuit.</small>
+            </label>
+            <button class="btn btn-primary" id="greg-to-heb-btn">
+              <i class="fa-solid fa-arrow-right"></i> Convertir
+            </button>
+            <div class="result" id="greg-to-heb-result"></div>
+          </div>
+        </div>
+
+        <!-- Heb → Greg -->
+        <div class="converter-card">
+          <div class="converter-head">
+            <span class="converter-num">2</span>
+            <h2>Date hébraïque → Date civile</h2>
+          </div>
+          <div class="converter-body">
+            <div class="field-row">
+              <label class="field">
+                <span>Jour</span>
+                <select id="heb-day"></select>
+              </label>
+              <label class="field">
+                <span>Mois</span>
+                <select id="heb-month"></select>
+              </label>
+              <label class="field">
+                <span>Année</span>
+                <input type="number" id="heb-year" min="3761" max="6000" value="5786" />
+              </label>
+            </div>
+            <button class="btn btn-primary" id="heb-to-greg-btn">
+              <i class="fa-solid fa-arrow-right"></i> Convertir
+            </button>
+            <div class="result" id="heb-to-greg-result"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Info box -->
+      <div class="info-box">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>
+          <h3>À propos du calendrier hébraïque</h3>
+          <p>Le calendrier hébraïque est <strong>luni-solaire</strong> : les mois suivent le cycle de la lune (~29 ou 30 jours), et un mois supplémentaire (Adar II) est ajouté 7 fois sur un cycle de 19 ans pour aligner l'année avec les saisons. Le jour commence à la tombée de la nuit.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <img src="logo.png" alt="Beth Loubavitch" class="footer-logo" />
+        <p>Beth Loubavitch Montrouge &amp; Région — au service de la communauté juive du 92 Sud.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><i class="fa-solid fa-user"></i> Rav David Mimoun</li>
+          <li><i class="fa-solid fa-location-dot"></i> 4 rue René Barthélémy<br />92120 Montrouge</li>
+          <li><i class="fa-solid fa-phone"></i> <a href="tel:0614256781">06 14 25 67 81</a></li>
+          <li><i class="fa-solid fa-envelope"></i> <a href="mailto:loubavitch92sud@gmail.com">loubavitch92sud@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/#offices">Offices</a></li>
+          <li><a href="/#ecole">Complexe scolaire</a></li>
+          <li><a href="convertisseur-de-dates.html">Convertisseur de dates</a></li>
+          <li><a href="/#galeries">Galeries</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mentions légales</h4>
+        <ul>
+          <li><a href="#">Conditions générales</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Beth Loubavitch Montrouge &amp; Région. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const { HDate, months, gematriya } = hebcal;
+
+    // === French Hebrew month names ===
+    const HEB_MONTHS_FR = {
+      1:  'Nissan',
+      2:  'Iyar',
+      3:  'Sivan',
+      4:  'Tamouz',
+      5:  'Av',
+      6:  'Eloul',
+      7:  'Tichri',
+      8:  'Hechvan',
+      9:  'Kislev',
+      10: 'Tevet',
+      11: 'Chevat',
+      12: 'Adar',
+      13: 'Adar II'
+    };
+    const HEB_MONTHS_HE = {
+      1: 'ניסן', 2: 'אייר', 3: 'סיון', 4: 'תמוז', 5: 'אב', 6: 'אלול',
+      7: 'תשרי', 8: 'חשון', 9: 'כסלו', 10: 'טבת', 11: 'שבט',
+      12: 'אדר', 13: 'אדר ב׳'
+    };
+    const WEEKDAYS_FR = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    const MONTHS_FR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+    function formatGreg(date) {
+      const wd = WEEKDAYS_FR[date.getDay()];
+      return `${wd} ${date.getDate()} ${MONTHS_FR[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
+    function formatHeb(hd, leap) {
+      let monthName = HEB_MONTHS_FR[hd.getMonth()];
+      if (leap && hd.getMonth() === 12) monthName = 'Adar I';
+      return `${hd.getDate()} ${monthName} ${hd.getFullYear()}`;
+    }
+
+    function formatHebHebrew(hd, leap) {
+      let monthName = HEB_MONTHS_HE[hd.getMonth()];
+      if (leap && hd.getMonth() === 12) monthName = 'אדר א׳';
+      const dayG = gematriya(hd.getDate());
+      const yearG = gematriya(hd.getFullYear() % 1000);
+      return `${dayG} ${monthName} ה׳${yearG}`;
+    }
+
+    // === Today widget ===
+    function updateToday() {
+      const now = new Date();
+      const hd = new HDate(now);
+      const leap = HDate.isLeapYear(hd.getFullYear());
+      document.getElementById('today-greg').textContent = formatGreg(now);
+      document.getElementById('today-heb').textContent = formatHeb(hd, leap);
+      document.getElementById('today-heb-hebrew').textContent = formatHebHebrew(hd, leap);
+    }
+
+    // === Greg → Heb ===
+    function gregToHeb() {
+      const val = document.getElementById('greg-input').value;
+      const afterSunset = document.getElementById('greg-after-sunset').value === 'true';
+      const result = document.getElementById('greg-to-heb-result');
+      if (!val) {
+        result.innerHTML = '<div class="result-error"><i class="fa-solid fa-triangle-exclamation"></i> Sélectionnez une date.</div>';
+        return;
+      }
+      const [y, m, d] = val.split('-').map(Number);
+      const date = new Date(y, m - 1, d);
+      let hd = new HDate(date);
+      if (afterSunset) hd = hd.next();
+      const leap = HDate.isLeapYear(hd.getFullYear());
+      result.innerHTML = `
+        <div class="result-success">
+          <div class="result-icon"><i class="fa-solid fa-check"></i></div>
+          <div class="result-text">
+            <span class="result-label">Date hébraïque</span>
+            <strong>${formatHeb(hd, leap)}</strong>
+            <span class="hebrew-text">${formatHebHebrew(hd, leap)}</span>
+          </div>
+        </div>`;
+    }
+
+    // === Heb → Greg ===
+    function hebToGreg() {
+      const day = parseInt(document.getElementById('heb-day').value);
+      const month = parseInt(document.getElementById('heb-month').value);
+      const year = parseInt(document.getElementById('heb-year').value);
+      const result = document.getElementById('heb-to-greg-result');
+      if (!day || !month || !year) {
+        result.innerHTML = '<div class="result-error"><i class="fa-solid fa-triangle-exclamation"></i> Renseignez tous les champs.</div>';
+        return;
+      }
+      try {
+        const hd = new HDate(day, month, year);
+        const date = hd.greg();
+        result.innerHTML = `
+          <div class="result-success">
+            <div class="result-icon"><i class="fa-solid fa-check"></i></div>
+            <div class="result-text">
+              <span class="result-label">Date grégorienne</span>
+              <strong>${formatGreg(date)}</strong>
+            </div>
+          </div>`;
+      } catch (e) {
+        result.innerHTML = `<div class="result-error"><i class="fa-solid fa-triangle-exclamation"></i> Date invalide : ${e.message}</div>`;
+      }
+    }
+
+    // === Populate Hebrew day/month selects based on year ===
+    function populateHebSelects() {
+      const year = parseInt(document.getElementById('heb-year').value) || 5786;
+      const monthSel = document.getElementById('heb-month');
+      const daySel = document.getElementById('heb-day');
+      const prevMonth = parseInt(monthSel.value) || 1;
+      const prevDay = parseInt(daySel.value) || 1;
+      const leap = HDate.isLeapYear(year);
+
+      // Months: Tichri (7) to Eloul (6) is the religious year, but civil order matches calendar.
+      // Using order Tichri → Eloul (typical Loubavitch / civil display order)
+      const monthOrder = [7, 8, 9, 10, 11, 12, 13, 1, 2, 3, 4, 5, 6];
+      monthSel.innerHTML = '';
+      monthOrder.forEach(m => {
+        if (m === 13 && !leap) return;
+        const opt = document.createElement('option');
+        opt.value = m;
+        let label = HEB_MONTHS_FR[m];
+        if (leap && m === 12) label = 'Adar I';
+        opt.textContent = label;
+        monthSel.appendChild(opt);
+      });
+      // Restore selection if still valid
+      const validMonth = leap ? prevMonth : (prevMonth === 13 ? 12 : prevMonth);
+      monthSel.value = validMonth;
+
+      // Days
+      const month = parseInt(monthSel.value);
+      const daysInMonth = HDate.daysInMonth(month, year);
+      daySel.innerHTML = '';
+      for (let d = 1; d <= daysInMonth; d++) {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        daySel.appendChild(opt);
+      }
+      daySel.value = Math.min(prevDay, daysInMonth);
+    }
+
+    // === Init ===
+    document.addEventListener('DOMContentLoaded', () => {
+      // Today widget
+      updateToday();
+
+      // Greg input default = today
+      const today = new Date();
+      const todayStr = today.toISOString().slice(0, 10);
+      document.getElementById('greg-input').value = todayStr;
+
+      // Heb selects
+      populateHebSelects();
+      const hdToday = new HDate(today);
+      document.getElementById('heb-year').value = hdToday.getFullYear();
+      populateHebSelects();
+      document.getElementById('heb-month').value = hdToday.getMonth();
+      // Repopulate days for that month
+      const daysInMonth = HDate.daysInMonth(hdToday.getMonth(), hdToday.getFullYear());
+      const daySel = document.getElementById('heb-day');
+      daySel.innerHTML = '';
+      for (let d = 1; d <= daysInMonth; d++) {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        daySel.appendChild(opt);
+      }
+      daySel.value = hdToday.getDate();
+
+      // Pre-fill results with today
+      gregToHeb();
+      hebToGreg();
+
+      // Listeners
+      document.getElementById('greg-to-heb-btn').addEventListener('click', gregToHeb);
+      document.getElementById('heb-to-greg-btn').addEventListener('click', hebToGreg);
+      document.getElementById('greg-input').addEventListener('change', gregToHeb);
+      document.getElementById('greg-after-sunset').addEventListener('change', gregToHeb);
+      document.getElementById('heb-year').addEventListener('change', () => { populateHebSelects(); hebToGreg(); });
+      document.getElementById('heb-month').addEventListener('change', () => { populateHebSelects(); hebToGreg(); });
+      document.getElementById('heb-day').addEventListener('change', hebToGreg);
+    });
+  </script>
+
+</body>
+</html>
