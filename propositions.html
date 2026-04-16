@@ -321,14 +321,303 @@
 
   <div class="nav-top">
     <strong>🎨 Propositions graphiques — section "Au quotidien"</strong>
+    <a href="#vA">A Bento</a>
+    <a href="#vB">B Carrousel</a>
+    <a href="#vC">C Polaroids</a>
+    <a href="#vD">D Mosaïque</a>
+    <span style="opacity:0.4">|</span>
     <a href="#v1">1 Constellation</a>
     <a href="#v2">2 Accent</a>
     <a href="#v3">3 Organique</a>
     <a href="#v4">4 Éditorial</a>
-    <a href="#v5">5 Blobs + Stats</a>
+    <a href="#v5">5 Blobs+Stats</a>
     <a href="#v6">6 Hexagones</a>
     <a href="/">← Retour site</a>
   </div>
+
+  <!-- ============ NOUVEAUX CERCLES ============ -->
+
+  <style>
+    /* ===== Cercles avec contour épais coloré (badges) ===== */
+    .vA-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 36px 30px;
+    }
+    .vA-circle {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      padding: 8px;
+      background: var(--qbg, var(--blue));
+      position: relative;
+      box-shadow: 0 14px 30px color-mix(in srgb, var(--qbg) 35%, transparent);
+      transition: transform 0.4s;
+      display: block;
+    }
+    .vA-circle:hover { transform: translateY(-6px) rotate(-2deg); }
+    .vA-circle-inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+    }
+    .vA-circle img { width:100%; height:100%; object-fit:cover; transition: transform 0.6s; }
+    .vA-circle:hover img { transform: scale(1.1); }
+    .vA-label {
+      margin-top: 12px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .vA-label small { display:block; font-size:11px; color:var(--text-soft); font-weight:500; margin-top:2px; }
+
+    /* ===== Cercles enchaînés (chain) ===== */
+    .vB-chain {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      padding: 30px 20px;
+    }
+    .vB-chain .qcircle {
+      width: 170px; height: 170px;
+      margin: 0 -22px;
+      border: 6px solid var(--white);
+      box-shadow: 0 8px 22px rgba(14,42,94,0.2);
+      transition: transform 0.4s, z-index 0s 0.2s;
+      position: relative;
+    }
+    .vB-chain .qcircle:hover {
+      transform: scale(1.18);
+      z-index: 10;
+      transition: transform 0.4s, z-index 0s;
+    }
+    .vB-chain .qcircle:nth-child(1) { z-index: 7; }
+    .vB-chain .qcircle:nth-child(2) { z-index: 6; }
+    .vB-chain .qcircle:nth-child(3) { z-index: 5; }
+    .vB-chain .qcircle:nth-child(4) { z-index: 4; }
+    .vB-chain .qcircle:nth-child(5) { z-index: 3; }
+    .vB-chain .qcircle:nth-child(6) { z-index: 2; }
+    .vB-chain .qcircle:nth-child(7) { z-index: 1; }
+
+    /* ===== Cercles orbitaux (planet system) ===== */
+    .vC-orbit {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    .vC-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(14,42,94,0.4);
+      padding: 20px;
+      z-index: 2;
+    }
+    .vC-center i { font-size: 36px; color: var(--gold); margin-bottom: 8px; }
+    .vC-center strong { font-family: 'Montserrat', sans-serif; font-size: 18px; line-height: 1.2; }
+    .vC-center span { font-size: 12px; opacity: 0.85; margin-top: 4px; }
+    .vC-orbit::before {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 480px; height: 480px;
+      border: 2px dashed rgba(30,95,220,0.25);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .vC-circle {
+      position: absolute;
+      width: 130px; height: 130px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--white);
+      box-shadow: 0 6px 20px rgba(14,42,94,0.25);
+      transition: transform 0.4s;
+    }
+    .vC-circle:hover { transform: scale(1.15); }
+    .vC-circle img { width:100%; height:100%; object-fit:cover; }
+    .vC-circle .vC-cap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(0deg, rgba(14,42,94,0.9), transparent);
+      color: var(--white);
+      padding: 22px 8px 8px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      line-height: 1.1;
+    }
+    .vC-pos-1 { top: 10px; left: 50%; transform: translateX(-50%); }
+    .vC-pos-2 { top: 80px; right: 30px; }
+    .vC-pos-3 { bottom: 80px; right: 30px; }
+    .vC-pos-4 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .vC-pos-5 { bottom: 80px; left: 30px; }
+    .vC-pos-6 { top: 80px; left: 30px; }
+    .vC-pos-7 { top: 50%; left: -20px; transform: translateY(-50%); }
+
+    /* ===== Cercles avec badge décoratif (couronne dorée) ===== */
+    .vD-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 50px 36px;
+      padding-top: 30px;
+    }
+    .vD-card {
+      position: relative;
+      width: 200px;
+      text-align: center;
+    }
+    .vD-card .qcircle {
+      width: 200px; height: 200px;
+      border: 5px solid var(--white);
+      box-shadow: 0 12px 28px rgba(14,42,94,0.18), 0 0 0 4px var(--qbg, var(--blue));
+    }
+    .vD-ribbon {
+      position: absolute;
+      top: -16px; left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--gold), #f0b73a);
+      color: var(--navy);
+      padding: 6px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(245,207,92,0.5);
+      z-index: 5;
+      white-space: nowrap;
+    }
+    .vD-name {
+      margin-top: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    @media (max-width: 800px) {
+      .vC-orbit { width: 100%; height: 540px; }
+      .vC-center { width: 180px; height: 180px; }
+      .vC-circle { width: 100px; height: 100px; }
+      .vB-chain .qcircle { width: 130px; height: 130px; margin: -8px -16px; }
+    }
+  </style>
+
+  <!-- ===== VARIANT A : Bordure épaisse colorée + label dehors ===== -->
+  <div class="proposal" id="vA">
+    <div class="proposal-head">
+      <div>
+        <h2>A — Cercles "badge" : bordure épaisse colorée + label dessous</h2>
+        <p>Photo nette dans cercle blanc, contour coloré épais (style médaille). Label sous le cercle.</p>
+      </div>
+      <span class="proposal-num" style="background:#10b981;color:#fff;">CERCLES A</span>
+    </div>
+    <div class="proposal-body">
+      <div class="vA-grid">
+        <div><a href="#" class="vA-circle" style="--qbg:#1e5fdc;"><div class="vA-circle-inner"><img src="photos/synagogue.jpg"/></div></a><div class="vA-label">Synagogue &amp; Offices<small>Prière</small></div></div>
+        <div><a href="#" class="vA-circle" style="--qbg:#00a7d5;"><div class="vA-circle-inner"><img src="photos/ecole.jpg"/></div></a><div class="vA-label">École Pardess 'Hannah<small>Primaire</small></div></div>
+        <div><a href="#" class="vA-circle" style="--qbg:#f5cf5c;"><div class="vA-circle-inner"><img src="photos/maternelle.jpg"/></div></a><div class="vA-label">Le Gan Pardess<small>Maternelle</small></div></div>
+        <div><a href="#" class="vA-circle" style="--qbg:#d97706;"><div class="vA-circle-inner"><img src="photos/creche.jpg"/></div></a><div class="vA-label">Les Crèches<small>Tout-petits</small></div></div>
+        <div><a href="#" class="vA-circle" style="--qbg:#0e2a5e;"><div class="vA-circle-inner"><img src="photos/cours-torah.jpg"/></div></a><div class="vA-label">Cours &amp; Étude<small>Torah</small></div></div>
+        <div><a href="#" class="vA-circle" style="--qbg:#be123c;"><div class="vA-circle-inner"><img src="photos/lev-israel.jpg"/></div></a><div class="vA-label">Lev Israël<small>Action sociale</small></div></div>
+        <div><a href="#" class="vA-circle" style="--qbg:#0891b2;"><div class="vA-circle-inner"><img src="photos/mikve.jpg"/></div></a><div class="vA-label">Mikvé<small>Pureté</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT B : Cercles enchaînés (chain) ===== -->
+  <div class="proposal" id="vB">
+    <div class="proposal-head">
+      <div>
+        <h2>B — Cercles enchaînés (qui se chevauchent)</h2>
+        <p>Cercles bord blanc qui se touchent et se chevauchent en chaîne. Hover : grossit et passe au-dessus.</p>
+      </div>
+      <span class="proposal-num" style="background:#10b981;color:#fff;">CERCLES B</span>
+    </div>
+    <div class="proposal-body">
+      <div class="vB-chain">
+        <a href="#" class="qcircle" style="--qbg:#1e5fdc;"><img src="photos/synagogue.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Synagogue</span></div></a>
+        <a href="#" class="qcircle" style="--qbg:#00a7d5;"><img src="photos/ecole.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">École</span></div></a>
+        <a href="#" class="qcircle" style="--qbg:#f5cf5c;"><img src="photos/maternelle.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Gan</span></div></a>
+        <a href="#" class="qcircle" style="--qbg:#d97706;"><img src="photos/creche.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Crèches</span></div></a>
+        <a href="#" class="qcircle" style="--qbg:#0e2a5e;"><img src="photos/cours-torah.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Cours</span></div></a>
+        <a href="#" class="qcircle" style="--qbg:#be123c;"><img src="photos/lev-israel.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Lev Israël</span></div></a>
+        <a href="#" class="qcircle" style="--qbg:#0891b2;"><img src="photos/mikve.jpg"/><div class="qcircle-overlay"><span class="qcircle-title">Mikvé</span></div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT C : Orbital (système solaire) ===== -->
+  <div class="proposal" id="vC">
+    <div class="proposal-head">
+      <div>
+        <h2>C — Orbital : un cœur central + 7 cercles autour</h2>
+        <p>Cercle central "Beth Loubavitch" entouré des 7 activités sur une orbite pointillée.</p>
+      </div>
+      <span class="proposal-num" style="background:#10b981;color:#fff;">CERCLES C</span>
+    </div>
+    <div class="proposal-body" style="background:radial-gradient(circle, #f0f9ff 0%, var(--bg) 70%);">
+      <div class="vC-orbit">
+        <div class="vC-center">
+          <i class="fa-solid fa-star-of-david"></i>
+          <strong>Beth Loubavitch<br/>92 Sud</strong>
+          <span>Au cœur de la communauté</span>
+        </div>
+        <a href="#" class="vC-circle vC-pos-1"><img src="photos/synagogue.jpg"/><div class="vC-cap">Synagogue</div></a>
+        <a href="#" class="vC-circle vC-pos-2"><img src="photos/ecole.jpg"/><div class="vC-cap">École</div></a>
+        <a href="#" class="vC-circle vC-pos-3"><img src="photos/maternelle.jpg"/><div class="vC-cap">Le Gan</div></a>
+        <a href="#" class="vC-circle vC-pos-4"><img src="photos/creche.jpg"/><div class="vC-cap">Crèches</div></a>
+        <a href="#" class="vC-circle vC-pos-5"><img src="photos/cours-torah.jpg"/><div class="vC-cap">Cours</div></a>
+        <a href="#" class="vC-circle vC-pos-6"><img src="photos/lev-israel.jpg"/><div class="vC-cap">Lev Israël</div></a>
+        <a href="#" class="vC-circle vC-pos-7"><img src="photos/mikve.jpg"/><div class="vC-cap">Mikvé</div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VARIANT D : Cercles avec ruban doré au-dessus ===== -->
+  <div class="proposal" id="vD">
+    <div class="proposal-head">
+      <div>
+        <h2>D — Cercles "trophée" : ruban doré au-dessus + double bordure</h2>
+        <p>Style médaille / trophée. Ruban doré au-dessus avec catégorie, double anneau coloré autour de la photo.</p>
+      </div>
+      <span class="proposal-num" style="background:#10b981;color:#fff;">CERCLES D</span>
+    </div>
+    <div class="proposal-body">
+      <div class="vD-grid">
+        <div class="vD-card"><span class="vD-ribbon">Prière</span><a href="#" class="qcircle" style="--qbg:#1e5fdc;"><img src="photos/synagogue.jpg"/></a><div class="vD-name">Synagogue &amp; Offices</div></div>
+        <div class="vD-card"><span class="vD-ribbon">Éducation</span><a href="#" class="qcircle" style="--qbg:#00a7d5;"><img src="photos/ecole.jpg"/></a><div class="vD-name">École Pardess 'Hannah</div></div>
+        <div class="vD-card"><span class="vD-ribbon">Maternelle</span><a href="#" class="qcircle" style="--qbg:#d97706;"><img src="photos/maternelle.jpg"/></a><div class="vD-name">Le Gan Pardess</div></div>
+        <div class="vD-card"><span class="vD-ribbon">Petite enfance</span><a href="#" class="qcircle" style="--qbg:#b45309;"><img src="photos/creche.jpg"/></a><div class="vD-name">Les Crèches</div></div>
+        <div class="vD-card"><span class="vD-ribbon">Étude</span><a href="#" class="qcircle" style="--qbg:#0e2a5e;"><img src="photos/cours-torah.jpg"/></a><div class="vD-name">Cours &amp; Étude</div></div>
+        <div class="vD-card"><span class="vD-ribbon">Action sociale</span><a href="#" class="qcircle" style="--qbg:#be123c;"><img src="photos/lev-israel.jpg"/></a><div class="vD-name">Lev Israël</div></div>
+        <div class="vD-card"><span class="vD-ribbon">Pureté</span><a href="#" class="qcircle" style="--qbg:#0891b2;"><img src="photos/mikve.jpg"/></a><div class="vD-name">Mikvé</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ANCIENNES (cercles) ============ -->
 
   <!-- ===== VARIANT 1 : Constellation ===== -->
   <div class="proposal" id="v1">
