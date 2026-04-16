@@ -194,138 +194,66 @@ h1, h2, h3, h4 {
   color: var(--blue);
 }
 .nav ul a:hover > i:first-child { opacity: 1; }
-.has-dropdown { position: relative; }
+.has-dropdown { position: relative; --mc: var(--blue); }
 .has-dropdown:hover .chev { transform: rotate(180deg); }
+.has-dropdown:hover > a { color: var(--mc); }
 
-.megadrop {
-  --mc: var(--blue);
-  --mcl: #e6efff;
+.dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 4px);
   left: 0;
   background: var(--white);
-  min-width: 360px;
-  border-radius: 14px;
-  box-shadow: 0 20px 50px rgba(14, 42, 94, 0.22);
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(14, 42, 94, 0.15);
+  padding: 6px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s 0.22s;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s 0.18s;
   z-index: 200;
-  overflow: hidden;
-  border-top: 4px solid var(--mc);
+  border-top: 3px solid var(--mc);
 }
-.megadrop::before {
+.dropdown::before {
   content: "";
   position: absolute;
-  top: -12px;
-  left: 22px;
-  width: 18px;
-  height: 18px;
+  top: -10px;
+  left: 18px;
+  width: 12px;
+  height: 12px;
   background: var(--mc);
   clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
-.has-dropdown:hover .megadrop,
-.has-dropdown:focus-within .megadrop {
+.has-dropdown:hover .dropdown,
+.has-dropdown:focus-within .dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s;
 }
-
-.megadrop-head {
-  background: linear-gradient(135deg, var(--mc) 0%, color-mix(in srgb, var(--mc) 60%, black) 100%);
-  color: var(--white);
-  padding: 16px 22px;
-  position: relative;
-}
-.megadrop-head::after {
-  content: "";
-  position: absolute;
-  top: -30px; right: -30px;
-  width: 110px; height: 110px;
-  background: radial-gradient(circle, rgba(255,255,255,0.18), transparent 70%);
-  border-radius: 50%;
-}
-.megadrop-eyebrow {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  opacity: 0.85;
-  margin-bottom: 4px;
-}
-.megadrop-head h4 {
-  color: var(--white);
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 16px;
-  margin: 0;
-  position: relative;
-}
-
-.megadrop-items {
-  padding: 8px;
-  background: var(--white);
-}
-.megadrop-2col .megadrop-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
-  min-width: 480px;
-}
-.megadrop-2col { min-width: 520px; }
-
-.mega-item {
+.dropdown a {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
+  gap: 9px;
+  padding: 7px 12px;
   font-size: 13px;
-  color: var(--text) !important;
-  transition: background 0.2s, transform 0.2s;
-  text-decoration: none;
+  font-weight: 500;
+  color: var(--text);
+  border-radius: 5px;
   white-space: nowrap;
+  transition: all 0.15s;
 }
-.mega-item:hover {
-  background: var(--mcl);
-  transform: translateX(3px);
-}
-.mega-icon {
-  width: 38px; height: 38px;
-  border-radius: 10px;
-  background: var(--mcl);
+.dropdown a > i:first-child {
+  width: 16px;
+  text-align: center;
+  font-size: 12px;
   color: var(--mc);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-  transition: all 0.2s;
+  margin: 0;
 }
-.mega-item:hover .mega-icon {
-  background: var(--mc);
-  color: var(--white);
-  transform: rotate(-6deg) scale(1.05);
+.dropdown a:hover {
+  background: color-mix(in srgb, var(--mc) 8%, transparent);
+  color: var(--mc);
 }
-.mega-item strong {
-  display: block;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 13.5px;
-  color: var(--navy);
-  line-height: 1.2;
-}
-.mega-item span {
-  display: block;
-  font-size: 11.5px;
-  color: var(--text-soft);
-  margin-top: 2px;
-  font-weight: 400;
-}
-.mega-item:hover strong { color: var(--mc); }
 .nav-highlight {
   background: linear-gradient(135deg, var(--gold), #f0b73a);
   color: var(--navy) !important;
