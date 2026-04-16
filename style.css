@@ -260,20 +260,13 @@ h1, h2, h3, h4 {
   bottom: -1px;
   left: 0;
   right: 0;
-  height: 80px;
-  background:
-    radial-gradient(ellipse at 50% 100%, var(--bg) 50%, transparent 51%);
+  height: 60px;
   z-index: 3;
-}
-.hero-shape::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40px;
   background: var(--bg);
-  clip-path: polygon(0 100%, 100% 100%, 100% 30%, 0 80%);
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,0 Q360,60 720,30 T1440,30 L1440,60 L0,60 Z' fill='black'/></svg>");
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,0 Q360,60 720,30 T1440,30 L1440,60 L0,60 Z' fill='black'/></svg>");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
 .hero-inner {
   position: relative;
