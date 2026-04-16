@@ -992,8 +992,64 @@ h1, h2, h3, h4 {
 
 /* === Quotidien (cercles photos) === */
 .quotidien-section {
-  padding: 60px 0 50px;
+  padding: 70px 0 50px;
   background: var(--bg);
+  position: relative;
+}
+.quotidien-head { margin-bottom: 50px; }
+.quotidien-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(32px, 5.5vw, 60px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--navy);
+  margin: 0;
+}
+.quotidien-title .qt-accent {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--blue) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: qtShimmer 5s linear infinite;
+  padding: 0 4px;
+}
+.quotidien-title .qt-accent::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -4px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 6px;
+  z-index: -1;
+  opacity: 0.7;
+  transform: skewX(-8deg);
+}
+.quotidien-title .qt-script {
+  display: block;
+  margin-top: 8px;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 1.05em;
+  color: var(--gold);
+  font-style: normal;
+  letter-spacing: 0;
+  transform: rotate(-2deg);
+  text-shadow: 2px 3px 0 rgba(14, 42, 94, 0.08);
+}
+@keyframes qtShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+.quotidien-head p {
+  margin-top: 14px;
+  font-size: 16px;
 }
 .quotidien-grid {
   display: flex;
