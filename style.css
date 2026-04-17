@@ -285,65 +285,9 @@ h1, h2, h3, h4 {
   padding: 80px 0 100px;
   overflow: hidden;
 }
-.hero-photo {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 60%;
-  height: 100%;
-  background: url('photos/complex.jpg') center right / cover no-repeat;
-  -webkit-mask-image: linear-gradient(90deg,
-    transparent 0%,
-    rgba(0,0,0,0.15) 25%,
-    rgba(0,0,0,0.6) 60%,
-    rgba(0,0,0,0.85) 100%);
-  mask-image: linear-gradient(90deg,
-    transparent 0%,
-    rgba(0,0,0,0.15) 25%,
-    rgba(0,0,0,0.6) 60%,
-    rgba(0,0,0,0.85) 100%);
-  mix-blend-mode: luminosity;
-  opacity: 0.55;
-  z-index: 0;
-}
-.hero-rabbi {
-  position: absolute;
-  right: 6%;
-  bottom: 0;
-  height: 95%;
-  max-height: 460px;
-  z-index: 4;
-  pointer-events: none;
-  opacity: 0.8;
-  filter: drop-shadow(0 8px 30px rgba(14,42,94,0.5));
-  -webkit-mask-image: linear-gradient(0deg,
-    transparent 0%,
-    black 12%,
-    black 85%,
-    transparent 100%);
-  mask-image: linear-gradient(0deg,
-    transparent 0%,
-    black 12%,
-    black 85%,
-    transparent 100%);
-}
-@media (max-width: 900px) {
-  .hero-rabbi { opacity: 0.3; right: 2%; height: 80%; }
-}
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,
-    rgba(14,42,94,0.95) 0%,
-    rgba(30,95,220,0.7) 40%,
-    rgba(30,95,220,0.15) 75%,
-    rgba(30,95,220,0.3) 100%);
-  z-index: 2;
-}
 .hero-inner {
   position: relative;
-  z-index: 3;
+  z-index: 2;
 }
 .hero::before {
   content: "";
@@ -2092,7 +2036,6 @@ h1, h2, h3, h4 {
 }
 @media (max-width: 600px) {
   .hero { padding: 80px 0 100px; }
-  .hero-photo { width: 100%; opacity: 0.25; }
   .cards-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
   .topbar-left a:not(:first-child) { display: none; }
