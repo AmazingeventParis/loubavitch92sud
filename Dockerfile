@@ -1,6 +1,8 @@
-FROM nginx:alpine
-COPY *.html /usr/share/nginx/html/
-COPY *.css /usr/share/nginx/html/
-COPY *.png /usr/share/nginx/html/
-COPY photos /usr/share/nginx/html/photos
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json ./
+RUN npm install --production
+COPY . .
+RUN mkdir -p data uploads
 EXPOSE 80
+CMD ["node", "server.js"]

@@ -199,6 +199,17 @@
     </div>
   </section>
 
+  <!-- Actualités (articles dynamiques) -->
+  <section class="actualites-section" id="actualites">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Actualités</span>
+        <h2>Les dernières nouvelles</h2>
+      </div>
+      <div class="actualites-grid" id="actualites-grid"></div>
+    </div>
+  </section>
+
   <!-- Sections cards -->
   <section class="sections" id="offices">
     <div class="container">
@@ -360,6 +371,30 @@
   </footer>
 
   <script>
+    (async function loadActualites() {
+      try {
+        const r = await fetch('/api/articles');
+        const articles = await r.json();
+        const grid = document.getElementById('actualites-grid');
+        const section = document.querySelector('.actualites-section');
+        if (!articles.length) { section.style.display = 'none'; return; }
+        grid.innerHTML = articles.slice(0, 6).map(a => {
+          const date = new Date(a.created_at).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+          const excerpt = a.content.length > 150 ? a.content.slice(0, 150) + '...' : a.content;
+          return `<div class="actu-card">
+            ${a.image ? `<img class="actu-card-img" src="${a.image}" alt="${a.title}" loading="lazy" />` : ''}
+            <div class="actu-card-body">
+              <div class="actu-date">${date}</div>
+              <h3>${a.title}</h3>
+              <p>${excerpt}</p>
+            </div>
+          </div>`;
+        }).join('');
+      } catch(e) {
+        document.querySelector('.actualites-section').style.display = 'none';
+      }
+    })();
+
     (async function loadShabbatWidget() {
       const WEEKDAYS = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
       const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];

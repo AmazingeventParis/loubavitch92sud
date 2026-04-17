@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Beth Loubavitch 92 Sud</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root { --blue:#1e5fdc; --navy:#0e2a5e; --gold:#f5cf5c; --bg:#f7fafc; --white:#fff; --border:#e6ebf2; --text:#1a2236; --text-soft:#5a6577; --red:#dc2626; --green:#16a34a; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); }
+    a { color:var(--blue); text-decoration:none; }
+
+    /* Login */
+    .login-wrap { display:flex; justify-content:center; align-items:center; min-height:100vh; padding:20px; }
+    .login-box { background:var(--white); border-radius:14px; padding:40px; box-shadow:0 8px 24px rgba(14,42,94,0.08); max-width:400px; width:100%; text-align:center; }
+    .login-box img { height:60px; margin-bottom:16px; }
+    .login-box h1 { font-family:'Montserrat',sans-serif; font-size:22px; color:var(--navy); margin-bottom:6px; }
+    .login-box p { font-size:14px; color:var(--text-soft); margin-bottom:24px; }
+    .login-box input { width:100%; padding:12px 16px; border:2px solid var(--border); border-radius:8px; font-size:15px; font-family:inherit; margin-bottom:14px; }
+    .login-box input:focus { outline:none; border-color:var(--blue); }
+    .login-box button { width:100%; padding:12px; background:var(--blue); color:var(--white); border:none; border-radius:8px; font-weight:700; font-size:15px; cursor:pointer; font-family:'Montserrat',sans-serif; }
+    .login-box button:hover { background:var(--navy); }
+    .login-error { color:var(--red); font-size:13px; margin-top:8px; display:none; }
+
+    /* Admin panel */
+    .admin-panel { display:none; }
+    .admin-header { background:var(--navy); color:var(--white); padding:14px 28px; display:flex; justify-content:space-between; align-items:center; }
+    .admin-header h1 { font-family:'Montserrat',sans-serif; font-size:18px; display:flex; align-items:center; gap:10px; }
+    .admin-header h1 img { height:36px; filter:brightness(0) invert(1); }
+    .admin-header button { background:none; border:1px solid rgba(255,255,255,0.3); color:var(--white); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:13px; }
+
+    .admin-body { max-width:1100px; margin:0 auto; padding:24px; display:grid; grid-template-columns:400px 1fr; gap:24px; }
+    @media(max-width:900px) { .admin-body { grid-template-columns:1fr; } }
+
+    /* Form */
+    .form-card { background:var(--white); border-radius:12px; padding:24px; box-shadow:0 4px 16px rgba(14,42,94,0.06); position:sticky; top:20px; align-self:start; }
+    .form-card h2 { font-family:'Montserrat',sans-serif; font-size:16px; color:var(--navy); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .form-card h2 i { color:var(--blue); }
+    .field { margin-bottom:14px; }
+    .field label { display:block; font-weight:600; font-size:12px; color:var(--text); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+    .field input, .field textarea { width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:8px; font-size:14px; font-family:inherit; }
+    .field input:focus, .field textarea:focus { outline:none; border-color:var(--blue); }
+    .field textarea { min-height:140px; resize:vertical; }
+    .img-preview { width:100%; max-height:180px; object-fit:cover; border-radius:8px; margin-top:8px; display:none; }
+    .form-actions { display:flex; gap:10px; }
+    .btn { padding:10px 20px; border:none; border-radius:8px; font-weight:700; font-size:14px; cursor:pointer; font-family:'Montserrat',sans-serif; display:inline-flex; align-items:center; gap:8px; }
+    .btn-blue { background:var(--blue); color:var(--white); }
+    .btn-blue:hover { background:var(--navy); }
+    .btn-gray { background:var(--bg); color:var(--text-soft); border:1px solid var(--border); }
+    .btn-gray:hover { background:#eee; }
+
+    /* Articles list */
+    .articles-list h2 { font-family:'Montserrat',sans-serif; font-size:16px; color:var(--navy); margin-bottom:14px; }
+    .article-card { background:var(--white); border-radius:12px; box-shadow:0 4px 16px rgba(14,42,94,0.06); overflow:hidden; margin-bottom:14px; display:flex; }
+    .article-card-img { width:140px; min-height:120px; background-size:cover; background-position:center; flex-shrink:0; }
+    .article-card-body { padding:16px; flex:1; }
+    .article-card-body h3 { font-family:'Montserrat',sans-serif; font-size:15px; color:var(--navy); margin-bottom:4px; }
+    .article-card-body p { font-size:13px; color:var(--text-soft); line-height:1.4; margin-bottom:10px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .article-card-body .meta { font-size:11px; color:var(--text-soft); margin-bottom:8px; }
+    .article-card-actions { display:flex; gap:8px; }
+    .article-card-actions button { padding:4px 10px; border-radius:5px; border:none; cursor:pointer; font-size:12px; font-weight:600; }
+    .btn-edit { background:#e6efff; color:var(--blue); }
+    .btn-delete { background:#fee2e2; color:var(--red); }
+    .btn-toggle { background:#fef3c7; color:#92400e; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:50px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+    .badge-published { background:#dcfce7; color:var(--green); }
+    .badge-draft { background:#fee2e2; color:var(--red); }
+    .empty-msg { text-align:center; padding:40px; color:var(--text-soft); font-size:14px; }
+  </style>
+</head>
+<body>
+
+  <!-- Login screen -->
+  <div class="login-wrap" id="login-screen">
+    <div class="login-box">
+      <img src="logo.png" alt="Beth Loubavitch" />
+      <h1>Administration</h1>
+      <p>Connectez-vous pour gérer les articles du site.</p>
+      <input type="password" id="login-pwd" placeholder="Mot de passe" />
+      <button onclick="login()">Se connecter</button>
+      <p class="login-error" id="login-error">Mot de passe incorrect</p>
+    </div>
+  </div>
+
+  <!-- Admin panel -->
+  <div class="admin-panel" id="admin-panel">
+    <div class="admin-header">
+      <h1><img src="logo.png" alt="" /> Administration — Articles</h1>
+      <button onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</button>
+    </div>
+    <div class="admin-body">
+      <div class="form-card">
+        <h2 id="form-title"><i class="fa-solid fa-plus"></i> Nouvel article</h2>
+        <form id="article-form" onsubmit="saveArticle(event)">
+          <input type="hidden" id="edit-id" />
+          <div class="field">
+            <label>Titre</label>
+            <input type="text" id="art-title" required placeholder="Titre de l'article" />
+          </div>
+          <div class="field">
+            <label>Photo</label>
+            <input type="file" id="art-image" accept="image/*" onchange="previewImage(this)" />
+            <img class="img-preview" id="img-preview" />
+          </div>
+          <div class="field">
+            <label>Contenu</label>
+            <textarea id="art-content" required placeholder="Rédigez le contenu de l'article..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-blue"><i class="fa-solid fa-check"></i> Publier</button>
+            <button type="button" class="btn btn-gray" onclick="resetForm()"><i class="fa-solid fa-xmark"></i> Annuler</button>
+          </div>
+        </form>
+      </div>
+      <div class="articles-list">
+        <h2><i class="fa-solid fa-newspaper" style="color:var(--blue);margin-right:6px;"></i> Articles existants (<span id="count">0</span>)</h2>
+        <div id="articles-container">
+          <div class="empty-msg">Aucun article pour le moment.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let PASSWORD = '';
+
+    function login() {
+      PASSWORD = document.getElementById('login-pwd').value;
+      fetch('/api/articles/all', { headers: { 'x-admin-password': PASSWORD } })
+        .then(r => {
+          if (!r.ok) throw new Error();
+          return r.json();
+        })
+        .then(() => {
+          document.getElementById('login-screen').style.display = 'none';
+          document.getElementById('admin-panel').style.display = 'block';
+          loadArticles();
+        })
+        .catch(() => {
+          document.getElementById('login-error').style.display = 'block';
+        });
+    }
+    document.getElementById('login-pwd').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+    function logout() {
+      PASSWORD = '';
+      document.getElementById('admin-panel').style.display = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('login-pwd').value = '';
+      document.getElementById('login-error').style.display = 'none';
+    }
+
+    function previewImage(input) {
+      const prev = document.getElementById('img-preview');
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => { prev.src = e.target.result; prev.style.display = 'block'; };
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        prev.style.display = 'none';
+      }
+    }
+
+    async function loadArticles() {
+      const r = await fetch('/api/articles/all', { headers: { 'x-admin-password': PASSWORD } });
+      const articles = await r.json();
+      document.getElementById('count').textContent = articles.length;
+      const container = document.getElementById('articles-container');
+      if (articles.length === 0) {
+        container.innerHTML = '<div class="empty-msg">Aucun article pour le moment.</div>';
+        return;
+      }
+      container.innerHTML = articles.map(a => {
+        const date = new Date(a.created_at).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+        const badge = a.published ? '<span class="badge badge-published">Publié</span>' : '<span class="badge badge-draft">Brouillon</span>';
+        const excerpt = a.content.length > 120 ? a.content.slice(0, 120) + '...' : a.content;
+        return `
+          <div class="article-card">
+            ${a.image ? `<div class="article-card-img" style="background-image:url('${a.image}')"></div>` : ''}
+            <div class="article-card-body">
+              <h3>${a.title}</h3>
+              <div class="meta">${date} ${badge}</div>
+              <p>${excerpt}</p>
+              <div class="article-card-actions">
+                <button class="btn-edit" onclick="editArticle('${a.id}')"><i class="fa-solid fa-pen"></i> Modifier</button>
+                <button class="btn-toggle" onclick="toggleArticle('${a.id}', ${!a.published})"><i class="fa-solid fa-eye${a.published ? '-slash' : ''}"></i> ${a.published ? 'Masquer' : 'Publier'}</button>
+                <button class="btn-delete" onclick="deleteArticle('${a.id}')"><i class="fa-solid fa-trash"></i> Supprimer</button>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    async function saveArticle(e) {
+      e.preventDefault();
+      const id = document.getElementById('edit-id').value;
+      const formData = new FormData();
+      formData.append('title', document.getElementById('art-title').value);
+      formData.append('content', document.getElementById('art-content').value);
+      const file = document.getElementById('art-image').files[0];
+      if (file) formData.append('image', file);
+
+      const url = id ? `/api/articles/${id}` : '/api/articles';
+      const method = id ? 'PUT' : 'POST';
+      await fetch(url, { method, headers: { 'x-admin-password': PASSWORD }, body: formData });
+      resetForm();
+      loadArticles();
+    }
+
+    async function editArticle(id) {
+      const r = await fetch('/api/articles/all', { headers: { 'x-admin-password': PASSWORD } });
+      const articles = await r.json();
+      const a = articles.find(x => x.id === id);
+      if (!a) return;
+      document.getElementById('edit-id').value = a.id;
+      document.getElementById('art-title').value = a.title;
+      document.getElementById('art-content').value = a.content;
+      document.getElementById('form-title').innerHTML = '<i class="fa-solid fa-pen"></i> Modifier l\'article';
+      if (a.image) {
+        const prev = document.getElementById('img-preview');
+        prev.src = a.image;
+        prev.style.display = 'block';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function deleteArticle(id) {
+      if (!confirm('Supprimer cet article ?')) return;
+      await fetch(`/api/articles/${id}`, { method: 'DELETE', headers: { 'x-admin-password': PASSWORD } });
+      loadArticles();
+    }
+
+    async function toggleArticle(id, published) {
+      const formData = new FormData();
+      formData.append('published', published);
+      await fetch(`/api/articles/${id}`, { method: 'PUT', headers: { 'x-admin-password': PASSWORD }, body: formData });
+      loadArticles();
+    }
+
+    function resetForm() {
+      document.getElementById('article-form').reset();
+      document.getElementById('edit-id').value = '';
+      document.getElementById('form-title').innerHTML = '<i class="fa-solid fa-plus"></i> Nouvel article';
+      document.getElementById('img-preview').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
