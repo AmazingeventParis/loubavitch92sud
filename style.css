@@ -2010,12 +2010,43 @@ h1, h2, h3, h4 {
   margin-top: 2px;
   text-transform: capitalize;
 }
-@media (max-width: 1000px) {
-  .minicards-grid { grid-template-columns: repeat(2, 1fr); }
+.minicards-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
-@media (max-width: 500px) {
-  .minicards-grid { grid-template-columns: 1fr; }
+.minicard-dual {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 4px;
 }
+.minicard-dual > div { flex: 1; }
+.minicard-sep {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+}
+.minicard-sublabel {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-bottom: 2px;
+}
+.minicard-sublabel i {
+  font-size: 10px;
+  margin-right: 3px;
+  color: var(--mcc);
+}
+.minicard-dual strong {
+  font-size: 16px;
+}
+.minicard-dual .minicard-sub {
+  font-size: 10px;
+}
+@media (max-width: 900px) {
+  .minicards-3 { grid-template-columns: 1fr; }
+}
+
 
 /* === Homepage Shabbat widget === */
 .shabbat-widget-section {
