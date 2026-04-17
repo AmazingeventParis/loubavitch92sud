@@ -398,7 +398,7 @@
         const havdalah = items.find(it => it.category === 'havdalah');
         const parasha = items.find(it => it.category === 'parashat');
         let parashaName = '';
-        if (parasha) parashaName = parasha.title.replace(/^Parachat /, '');
+        if (parasha) parashaName = parasha.title.replace(/^(Parashat|Parachat|Parachah)\s+/i, '');
         else if (candles && candles.memo) {
           const m = candles.memo.match(/Parachah\s+(.+)/);
           if (m) parashaName = m[1];
