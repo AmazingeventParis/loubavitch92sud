@@ -30,9 +30,19 @@ const storage = multer.diskStorage({
 const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
 function readArticles() {
-  return JSON.parse(fs.readFileSync(ARTICLES_FILE, 'utf8'));
+  try {
+    if (!fs.existsSync(ARTICLES_FILE)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+      fs.writeFileSync(ARTICLES_FILE, '[]', 'utf8');
+    }
+    return JSON.parse(fs.readFileSync(ARTICLES_FILE, 'utf8'));
+  } catch (e) {
+    console.error('readArticles error:', e.message);
+    return [];
+  }
 }
 function writeArticles(articles) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
   fs.writeFileSync(ARTICLES_FILE, JSON.stringify(articles, null, 2), 'utf8');
 }
 
