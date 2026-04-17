@@ -306,20 +306,44 @@ h1, h2, h3, h4 {
   opacity: 0.55;
   z-index: 0;
 }
+.hero-rabbi {
+  position: absolute;
+  right: 6%;
+  bottom: 0;
+  height: 95%;
+  max-height: 460px;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.8;
+  filter: drop-shadow(0 8px 30px rgba(14,42,94,0.5));
+  -webkit-mask-image: linear-gradient(0deg,
+    transparent 0%,
+    black 12%,
+    black 85%,
+    transparent 100%);
+  mask-image: linear-gradient(0deg,
+    transparent 0%,
+    black 12%,
+    black 85%,
+    transparent 100%);
+}
+@media (max-width: 900px) {
+  .hero-rabbi { opacity: 0.3; right: 2%; height: 80%; }
+}
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg,
-    rgba(14,42,94,0.92) 0%,
-    rgba(30,95,220,0.65) 35%,
-    rgba(30,95,220,0.25) 70%,
-    rgba(30,95,220,0.45) 100%);
-  z-index: 1;
+    rgba(14,42,94,0.95) 0%,
+    rgba(30,95,220,0.7) 40%,
+    rgba(30,95,220,0.15) 75%,
+    rgba(30,95,220,0.3) 100%);
+  z-index: 2;
 }
 .hero-inner {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 .hero::before {
   content: "";
@@ -335,7 +359,7 @@ h1, h2, h3, h4 {
   left: 0;
   right: 0;
   height: 60px;
-  z-index: 3;
+  z-index: 5;
   background: var(--bg);
   -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,0 Q360,60 720,30 T1440,30 L1440,60 L0,60 Z' fill='black'/></svg>");
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0,0 Q360,60 720,30 T1440,30 L1440,60 L0,60 Z' fill='black'/></svg>");
