@@ -6,8 +6,8 @@ const multer = require('multer');
 const app = express();
 app.use(express.json());
 
-const DATA_DIR = '/storage/data';
-const UPLOADS_DIR = '/storage/uploads';
+const DATA_DIR = path.join(__dirname, 'storage', 'data');
+const UPLOADS_DIR = path.join(__dirname, 'storage', 'uploads');
 const ARTICLES_FILE = path.join(DATA_DIR, 'articles.json');
 
 // Serve static files
