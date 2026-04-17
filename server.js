@@ -6,17 +6,17 @@ const multer = require('multer');
 const app = express();
 app.use(express.json());
 
-const DATA_DIR = path.join(__dirname, 'data');
-const UPLOADS_DIR = path.join(__dirname, 'uploads');
+const DATA_DIR = '/storage/data';
+const UPLOADS_DIR = '/storage/uploads';
 const ARTICLES_FILE = path.join(DATA_DIR, 'articles.json');
-
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-if (!fs.existsSync(ARTICLES_FILE)) fs.writeFileSync(ARTICLES_FILE, '[]', 'utf8');
 
 // Serve static files
 app.use(express.static(__dirname));
 app.use('/uploads', express.static(UPLOADS_DIR));
+
+// Ensure storage dirs exist
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
 // Multer for image upload
 const storage = multer.diskStorage({
