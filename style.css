@@ -2022,8 +2022,11 @@ h1, h2, h3, h4 {
 .minicard-dual > div { flex: 1; }
 .minicard-sep {
   width: 1px;
+  min-width: 1px;
+  max-width: 1px;
   background: var(--border);
   align-self: stretch;
+  flex-shrink: 0;
 }
 .minicard-sublabel {
   display: block;
