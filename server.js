@@ -6,8 +6,8 @@ const multer = require('multer');
 const app = express();
 app.use(express.json());
 
-const DATA_DIR = path.join(__dirname, 'storage', 'data');
-const UPLOADS_DIR = path.join(__dirname, 'storage', 'uploads');
+const DATA_DIR = path.join(__dirname, 'data');
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
 const ARTICLES_FILE = path.join(DATA_DIR, 'articles.json');
 
 // Serve static files
@@ -54,14 +54,12 @@ function authMiddleware(req, res, next) {
   next();
 }
 
-// DEBUG endpoint
-app.get('/api/debug', (req, res) => {
-  const exists = fs.existsSync(ARTICLES_FILE);
-  let content = null;
-  let dirContent = [];
-  try { content = fs.readFileSync(ARTICLES_FILE, 'utf8'); } catch(e) { content = 'ERROR: ' + e.message; }
-  try { dirContent = fs.readdirSync(DATA_DIR); } catch(e) { dirContent = ['ERROR: ' + e.message]; }
-  res.json({ ARTICLES_FILE, DATA_DIR, UPLOADS_DIR, exists, content, dirContent, cwd: process.cwd(), dirname: __dirname });
+// Import articles (pour restaurer apres redeploy)
+app.post('/api/import', authMiddleware, (req, res) => {
+  const { articles } = req.body;
+  if (!Array.isArray(articles)) return res.status(400).json({ error: 'articles array requis' });
+  writeArticles(articles);
+  res.json({ ok: true, count: articles.length });
 });
 
 // GET articles (public)
