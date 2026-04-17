@@ -164,53 +164,42 @@
     </div>
   </section>
 
-  <!-- Shabbat widget -->
-  <section class="shabbat-widget-section">
+  <!-- 4 mini-cartes Chabbat / Paracha -->
+  <section class="minicards-section">
     <div class="container">
-      <div class="shabbat-widget" id="shabbat-widget">
-        <div class="shabbat-widget-intro">
-          <span class="eyebrow"><i class="fa-solid fa-star-of-david"></i> Ce Chabbat</span>
-          <h3 id="sw-parasha">Chargement…</h3>
-          <p>Horaires calculés pour Montrouge.</p>
-          <a href="horaires.html" class="shabbat-widget-link">Voir tous les horaires <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="shabbat-widget-time">
-          <i class="fa-solid fa-fire"></i>
-          <span class="swt-label">Allumage des bougies</span>
-          <strong id="sw-candles">—</strong>
-          <span class="swt-date" id="sw-candles-date">—</span>
-        </div>
-        <div class="shabbat-widget-time">
-          <i class="fa-solid fa-wine-glass"></i>
-          <span class="swt-label">Fin du Chabbat</span>
-          <strong id="sw-havdalah">—</strong>
-          <span class="swt-date" id="sw-havdalah-date">—</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Paracha widget -->
-  <section class="paracha-widget-section">
-    <div class="container">
-      <div class="paracha-widget" id="paracha-widget">
-        <div class="paracha-widget-intro">
-          <span class="eyebrow"><i class="fa-solid fa-book-open"></i> Paracha de la semaine</span>
-          <h3 id="pw-name">Chargement…</h3>
-          <span class="hebrew-text" id="pw-he"></span>
-          <p>Étudiez la section hebdomadaire de la Torah.</p>
-          <a href="paracha.html">Voir la paracha complète <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-        <div class="paracha-widget-ref">
-          <i class="fa-solid fa-scroll"></i>
-          <span class="pwr-label">Lecture Torah</span>
-          <strong id="pw-torah">—</strong>
-        </div>
-        <div class="paracha-widget-ref">
-          <i class="fa-solid fa-feather"></i>
-          <span class="pwr-label">Haftara</span>
-          <strong id="pw-haftara">—</strong>
-        </div>
+      <div class="minicards-grid">
+        <a href="horaires.html" class="minicard" style="--mcc:#1e5fdc;">
+          <div class="minicard-icon"><i class="fa-solid fa-fire"></i></div>
+          <div class="minicard-body">
+            <span class="minicard-label">Allumage des bougies</span>
+            <strong id="sw-candles">—</strong>
+            <span class="minicard-sub" id="sw-candles-date">—</span>
+          </div>
+        </a>
+        <a href="horaires.html" class="minicard" style="--mcc:#d97706;">
+          <div class="minicard-icon"><i class="fa-solid fa-wine-glass"></i></div>
+          <div class="minicard-body">
+            <span class="minicard-label">Fin du Chabbat</span>
+            <strong id="sw-havdalah">—</strong>
+            <span class="minicard-sub" id="sw-havdalah-date">—</span>
+          </div>
+        </a>
+        <a href="paracha.html" class="minicard" style="--mcc:#0891b2;">
+          <div class="minicard-icon"><i class="fa-solid fa-scroll"></i></div>
+          <div class="minicard-body">
+            <span class="minicard-label">Paracha de la semaine</span>
+            <strong id="pw-name">—</strong>
+            <span class="minicard-sub hebrew-text" id="pw-he"></span>
+          </div>
+        </a>
+        <a href="paracha.html" class="minicard" style="--mcc:#be123c;">
+          <div class="minicard-icon"><i class="fa-solid fa-book-open"></i></div>
+          <div class="minicard-body">
+            <span class="minicard-label">Lecture Torah</span>
+            <strong id="pw-torah">—</strong>
+            <span class="minicard-sub" id="pw-haftara">—</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -396,14 +385,6 @@
         const items = data.items || [];
         const candles = items.find(it => it.category === 'candles');
         const havdalah = items.find(it => it.category === 'havdalah');
-        const parasha = items.find(it => it.category === 'parashat');
-        let parashaName = '';
-        if (parasha) parashaName = parasha.title.replace(/^(Parashat|Parachat|Parachah)\s+/i, '');
-        else if (candles && candles.memo) {
-          const m = candles.memo.match(/Parachah\s+(.+)/);
-          if (m) parashaName = m[1];
-        }
-        document.getElementById('sw-parasha').textContent = parashaName ? 'Parachat ' + parashaName : 'Chabbat';
         if (candles) {
           document.getElementById('sw-candles').textContent = fmtTime(candles.date);
           document.getElementById('sw-candles-date').textContent = fmtDate(candles.date);

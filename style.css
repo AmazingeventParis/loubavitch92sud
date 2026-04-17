@@ -1940,6 +1940,83 @@ h1, h2, h3, h4 {
   color: var(--blue) !important;
 }
 
+/* === 4 Mini-cartes (Chabbat + Paracha) === */
+.minicards-section {
+  padding: 30px 0;
+}
+.minicards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.minicard {
+  --mcc: var(--blue);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--mcc);
+  transition: all 0.25s;
+  text-decoration: none;
+  color: var(--text);
+}
+.minicard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-left-color: color-mix(in srgb, var(--mcc) 70%, black);
+}
+.minicard-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--mcc) 12%, white);
+  color: var(--mcc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: all 0.25s;
+}
+.minicard:hover .minicard-icon {
+  background: var(--mcc);
+  color: var(--white);
+  transform: rotate(-6deg);
+}
+.minicard-body { flex: 1; min-width: 0; }
+.minicard-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mcc);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 3px;
+}
+.minicard-body strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.minicard-sub {
+  display: block;
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-top: 2px;
+  text-transform: capitalize;
+}
+@media (max-width: 1000px) {
+  .minicards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .minicards-grid { grid-template-columns: 1fr; }
+}
+
 /* === Homepage Shabbat widget === */
 .shabbat-widget-section {
   padding: 40px 0;
