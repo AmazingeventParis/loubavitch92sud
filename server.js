@@ -54,6 +54,16 @@ function authMiddleware(req, res, next) {
   next();
 }
 
+// DEBUG endpoint
+app.get('/api/debug', (req, res) => {
+  const exists = fs.existsSync(ARTICLES_FILE);
+  let content = null;
+  let dirContent = [];
+  try { content = fs.readFileSync(ARTICLES_FILE, 'utf8'); } catch(e) { content = 'ERROR: ' + e.message; }
+  try { dirContent = fs.readdirSync(DATA_DIR); } catch(e) { dirContent = ['ERROR: ' + e.message]; }
+  res.json({ ARTICLES_FILE, DATA_DIR, UPLOADS_DIR, exists, content, dirContent, cwd: process.cwd(), dirname: __dirname });
+});
+
 // GET articles (public)
 app.get('/api/articles', (req, res) => {
   const articles = readArticles().filter(a => a.published);
