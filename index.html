@@ -381,14 +381,14 @@
         grid.innerHTML = articles.slice(0, 6).map(a => {
           const date = new Date(a.created_at).toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
           const excerpt = a.content.length > 150 ? a.content.slice(0, 150) + '...' : a.content;
-          return `<div class="actu-card">
+          return `<a href="article.html?id=${a.id}" class="actu-card">
             ${a.image ? `<img class="actu-card-img" src="${a.image}" alt="${a.title}" loading="lazy" />` : ''}
             <div class="actu-card-body">
               <div class="actu-date">${date}</div>
               <h3>${a.title}</h3>
               <p>${excerpt}</p>
             </div>
-          </div>`;
+          </a>`;
         }).join('');
       } catch(e) {
         document.querySelector('.actualites-section').style.display = 'none';
