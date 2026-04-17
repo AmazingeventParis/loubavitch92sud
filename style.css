@@ -1144,11 +1144,12 @@ h1, h2, h3, h4 {
 
 /* === Quotidien (cercles photos) === */
 .quotidien-section {
-  padding: 70px 0 50px;
-  background: var(--bg);
+  padding: 0 0 40px;
+  margin-top: -90px;
   position: relative;
+  z-index: 10;
 }
-.quotidien-head { margin-bottom: 50px; }
+.quotidien-head { margin-bottom: 20px; display: none; }
 .quotidien-title {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(32px, 5.5vw, 60px);
