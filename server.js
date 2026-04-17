@@ -35,7 +35,7 @@ function writeArticles(articles) {
   fs.writeFileSync(ARTICLES_FILE, JSON.stringify(articles, null, 2), 'utf8');
 }
 
-const ADMIN_PASSWORD = 'Beth92Sud!';
+const ADMIN_PASSWORD = 'Laurytal2!';
 
 function authMiddleware(req, res, next) {
   const pwd = req.headers['x-admin-password'] || req.query.password;
