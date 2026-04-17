@@ -2110,6 +2110,9 @@ h1, h2, h3, h4 {
 .article-page {
   padding: 30px 0 60px;
 }
+.article-page .breadcrumb a { color: var(--blue); }
+.article-page .breadcrumb span { color: var(--text); }
+.article-page .breadcrumb i { color: var(--text-soft); opacity: 1; }
 .article-wrapper {
   max-width: 800px;
   margin: 0 auto;
